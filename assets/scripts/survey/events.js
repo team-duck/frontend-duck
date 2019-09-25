@@ -1,8 +1,8 @@
 'use strict'
 
-// const api = require('./api')
+const api = require('./api')
 const getFormFields = require('./../../../lib/get-form-fields')
-// const ui = require('./ui')
+const ui = require('./ui')
 
 const onCreateSurvey = event => {
   event.preventDefault()
@@ -17,8 +17,10 @@ const onCreateSurvey = event => {
   }
 
   const surveyPojo = {
-    title: dataArray[0].survey.title,
-    questions: []
+    survey: {
+      title: dataArray[0].survey.title,
+      questions: []
+    }
   }
 
   for (let i = 1; i < dataArray.length; i++) {
@@ -39,8 +41,12 @@ const onCreateSurvey = event => {
       questionPojo.responses.push(optionPojo)
     }
 
-    surveyPojo.questions.push(questionPojo)
+    surveyPojo.survey.questions.push(questionPojo)
   }
+
+  api.createSurvey(surveyPojo)
+    .then(ui.createSurveySuccess)
+    .catch(ui.createSurveyFailure)
 }
 
 const addHandlers = () => {
