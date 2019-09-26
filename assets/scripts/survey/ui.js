@@ -3,7 +3,7 @@
 const store = require('./../store')
 const createSurveyTemplate = require('./../templates/create-survey-form.handlebars')
 const surveyControlsTemplate = require('./../templates/survey-controls.handlebars')
-const showSurveysTemplate = require('./../templates/survey-card.handlebars')
+const showSurveysTemplate = require('./../templates/survey-preview.handlebars')
 const jumbotronTemplate = require('./../templates/jumbotron.handlebars')
 
 const loadCreateSurvey = () => {

@@ -1,16 +1,15 @@
-{{#each surveys as |survey|}}
-  <div class="col-3">
-    <div class="card">
-      <div class="card-header">
-        {{survey.title}}
-      </div>
-      <div class="card-body">
-        {{#each survey.questions as |question|}}
-          {{> survey-question question=question }}
-        {{/each}}
-        <a href="#" class="btn btn-primary">Submit</a>
-        <a href="#" class="btn btn-primary">Results</a>
-      </div>
+
+<div class="col-3">
+  <div class="card">
+    <div class="card-header">
+      {{survey.title}}
+    </div>
+    <div class="card-body">
+      {{#each survey.questions as |question|}}
+        {{> survey-question question=question }}
+      {{/each}}
+      <a href="#" class="btn btn-primary">Respond</a>
+      <a href="#" class="btn btn-primary">Results</a>
     </div>
   </div>
-{{/each}}
+</div>
