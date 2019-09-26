@@ -1,0 +1,4 @@
+<h5 class="card-title">{{question.text}}</h5>
+{{#each question.responses as |response|}}
+  {{> question-response response=response }}
+{{/each}}
