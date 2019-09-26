@@ -7,7 +7,7 @@ const surveyUi = require('./../survey/ui')
 
 const onLoad = () => {
   authUi.loadNavbar()
-  authUi.loadAuthAccordion()
+  authUi.loadSplashPage()
 }
 
 const onSignedIn = () => {

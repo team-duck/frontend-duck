@@ -2,7 +2,7 @@
 
 const store = require('./../store')
 const navbarTemplate = require('./../templates/nav-bar-content.handlebars')
-const authAccordionTemplate = require('./../templates/auth-accordion.handlebars')
+const splashPageTemplate = require('./../templates/splash-page/splash-body.handlebars')
 const jumbotronTemplate = require('./../templates/jumbotron.handlebars')
 
 const loadNavbar = () => {
@@ -10,9 +10,9 @@ const loadNavbar = () => {
   $('nav').html(navbarHtml)
 }
 
-const loadAuthAccordion = () => {
-  const authAccordionHtml = authAccordionTemplate()
-  $('main').append(authAccordionHtml)
+const loadSplashPage = () => {
+  const splashPageHtml = splashPageTemplate()
+  $('main').append(splashPageHtml)
 }
 
 const loadJumbotron = () => {
@@ -55,7 +55,7 @@ const signOutFailure = () => {
 
 module.exports = {
   loadNavbar,
-  loadAuthAccordion,
+  loadSplashPage,
   loadJumbotron,
   signUpSuccess,
   signUpFailure,
