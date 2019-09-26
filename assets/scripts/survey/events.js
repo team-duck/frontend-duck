@@ -4,6 +4,14 @@ const api = require('./api')
 const getFormFields = require('./../../../lib/get-form-fields')
 const ui = require('./ui')
 
+const onIndexSurvey = event => {
+  event.preventDefault()
+
+  api.indexSurvey()
+    .then(ui.indexSurveySuccess)
+    .catch(ui.indexSurveyFailure)
+}
+
 const onCreateSurvey = event => {
   event.preventDefault()
 
@@ -50,10 +58,12 @@ const onCreateSurvey = event => {
 }
 
 const addHandlers = () => {
+  $('#index-surveys-button').on('click', onIndexSurvey)
   $('#create-survey').on('submit', onCreateSurvey)
 }
 
 module.exports = {
+  onIndexSurvey,
   onCreateSurvey,
   addHandlers
 }

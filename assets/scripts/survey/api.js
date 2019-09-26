@@ -3,6 +3,15 @@
 const config = require('./../config')
 const store = require('./../store')
 
+const indexSurvey = () => {
+  return $.ajax({
+    url: config.apiUrl + '/surveys',
+    headers: {
+      Authorization: 'bearer ' + store.user.token
+    }
+  })
+}
+
 const createSurvey = data => {
   return $.ajax({
     url: config.apiUrl + '/surveys',
@@ -15,5 +24,6 @@ const createSurvey = data => {
 }
 
 module.exports = {
+  indexSurvey,
   createSurvey
 }
