@@ -4,7 +4,7 @@ const store = require('./../store')
 const signUpTemplate = require('./../templates/sign-up-form.handlebars')
 const signInTemplate = require('./../templates/sign-in-form.handlebars')
 const userControlsTemplate = require('./../templates/user-controls.handlebars')
-const jumbotronTemplate = require('./../templates/jumbotron.handlers')
+const jumbotronTemplate = require('./../templates/jumbotron.handlebars')
 
 const loadSignUp = () => {
   const signUpHtml = signUpTemplate()
@@ -22,7 +22,7 @@ const loadUserControls = () => {
 }
 
 const loadJumbotron = () => {
-  const loadJumbotronHtml = jumbotronTemplate
+  const loadJumbotronHtml = jumbotronTemplate()
   $('main').append(loadJumbotronHtml)
 }
 
