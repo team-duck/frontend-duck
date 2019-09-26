@@ -3,12 +3,27 @@
 const api = require('./api')
 const getFormFields = require('./../../../lib/get-form-fields')
 const ui = require('./ui')
+const { apiUrl } = require('../config')
+const socket = require('socket.io-client')(apiUrl)
+const store = require('../store')
 
 const onIndexSurvey = event => {
   event.preventDefault()
-
   api.indexSurvey()
     .then(ui.indexSurveySuccess)
+    .catch(ui.indexSurveyFailure)
+}
+const onSocketIndex = message => {
+  console.log('socket words', message)
+  const indexView = store.view === 'index' // expect store.view to be set by other functions, prevents
+  api.indexSurvey()
+    .then(data => {
+      if (indexView) {
+        ui.indexSurveySuccess(data)
+      } else {
+        store.surveys = data.surveys
+      }
+    })
     .catch(ui.indexSurveyFailure)
 }
 
@@ -68,9 +83,10 @@ const onShowSurvey = event => {
 }
 
 const addHandlers = () => {
-  $('#index-surveys-button').on('click', onIndexSurvey)
-  $('#show-survey').on('submit', onShowSurvey)
-  $('#create-survey').on('submit', onCreateSurvey)
+  $('main').on('click', '#index-surveys-button', onIndexSurvey)
+  $('main').on('submit', '#show-survey', onShowSurvey)
+  $('main').on('submit', '#create-survey', onCreateSurvey)
+  socket.on('message', onSocketIndex) // listens for an event from the server with the label 'message'
 }
 
 module.exports = {
