@@ -6,11 +6,11 @@ const authUi = require('./ui')
 const surveyUi = require('./../survey/ui')
 
 const onLoad = () => {
+  authUi.loadNavbar()
   authUi.loadAuthAccordion()
 }
 
 const onSignedIn = () => {
-  authUi.loadUserControls()
   surveyUi.loadCreateSurvey()
   surveyUi.loadSurveyControls()
   surveyUi.loadJumbotron()
@@ -59,7 +59,7 @@ const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
   $('#change-password').on('submit', onChangePassword)
-  $('#signout-button').on('click', onSignOut)
+  $('nav').on('click', '#signout-button', onSignOut)
 }
 
 module.exports = {

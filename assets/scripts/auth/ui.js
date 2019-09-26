@@ -1,18 +1,18 @@
 'use strict'
 
 const store = require('./../store')
+const navbarTemplate = require('./../templates/nav-bar-content.handlebars')
 const authAccordionTemplate = require('./../templates/auth-accordion.handlebars')
-const userControlsTemplate = require('./../templates/user-controls.handlebars')
 const jumbotronTemplate = require('./../templates/jumbotron.handlebars')
+
+const loadNavbar = () => {
+  const navbarHtml = navbarTemplate()
+  $('nav').html(navbarHtml)
+}
 
 const loadAuthAccordion = () => {
   const authAccordionHtml = authAccordionTemplate()
   $('main').append(authAccordionHtml)
-}
-
-const loadUserControls = () => {
-  const userControlsHtml = userControlsTemplate()
-  $('main').append(userControlsHtml)
 }
 
 const loadJumbotron = () => {
@@ -54,8 +54,8 @@ const signOutFailure = () => {
 }
 
 module.exports = {
+  loadNavbar,
   loadAuthAccordion,
-  loadUserControls,
   loadJumbotron,
   signUpSuccess,
   signUpFailure,
