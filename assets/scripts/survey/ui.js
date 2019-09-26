@@ -13,6 +13,14 @@ const indexSurveyFailure = () => {
   $('#survey-status').text('Surveys not retrieved!')
 }
 
+const showSurveySuccess = data => {
+  $('#survey-status').append(`<p>${JSON.stringify(data)}</p>`)
+}
+
+const showSurveyFailure = () => {
+  $('#survey-status').text('Survey not retrieved!')
+}
+
 const createSurveySuccess = () => {
   $('#survey-status').text('Survey created!')
 }
@@ -24,6 +32,8 @@ const createSurveyFailure = () => {
 module.exports = {
   indexSurveySuccess,
   indexSurveyFailure,
+  showSurveySuccess,
+  showSurveyFailure,
   createSurveySuccess,
   createSurveyFailure
 }

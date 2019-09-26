@@ -57,13 +57,25 @@ const onCreateSurvey = event => {
     .catch(ui.createSurveyFailure)
 }
 
+const onShowSurvey = event => {
+  event.preventDefault()
+
+  const data = getFormFields(event.target)
+
+  api.showSurvey(data.survey.id)
+    .then(ui.showSurveySuccess)
+    .catch(ui.showSurveyFailure)
+}
+
 const addHandlers = () => {
   $('#index-surveys-button').on('click', onIndexSurvey)
+  $('#show-survey').on('submit', onShowSurvey)
   $('#create-survey').on('submit', onCreateSurvey)
 }
 
 module.exports = {
   onIndexSurvey,
+  onShowSurvey,
   onCreateSurvey,
   addHandlers
 }

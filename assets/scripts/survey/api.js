@@ -12,6 +12,15 @@ const indexSurvey = () => {
   })
 }
 
+const showSurvey = id => {
+  return $.ajax({
+    url: config.apiUrl + '/surveys/' + id,
+    headers: {
+      Authorization: 'bearer ' + store.user.token
+    }
+  })
+}
+
 const createSurvey = data => {
   return $.ajax({
     url: config.apiUrl + '/surveys',
@@ -25,5 +34,6 @@ const createSurvey = data => {
 
 module.exports = {
   indexSurvey,
+  showSurvey,
   createSurvey
 }
