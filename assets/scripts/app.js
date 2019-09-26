@@ -6,13 +6,6 @@
 // use require without a reference to ensure a file is bundled
 // require('./example')
 
-const store = require('./store')
-const authEvents = require('./auth/events')
-const surveyEvents = require('./survey/events')
-
 $(() => {
-  store.user = null
-  authEvents.onLoad()
-  authEvents.addHandlers()
-  surveyEvents.addHandlers()
+  // your JS code goes here
 })
