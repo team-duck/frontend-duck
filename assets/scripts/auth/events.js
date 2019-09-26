@@ -14,6 +14,7 @@ const onSignedIn = () => {
   authUi.loadUserControls()
   surveyUi.loadCreateSurvey()
   surveyUi.loadSurveyControls()
+  surveyUi.loadJumbotron()
 }
 
 const onSignUp = event => {

@@ -4,6 +4,7 @@ const store = require('./../store')
 const signUpTemplate = require('./../templates/sign-up-form.handlebars')
 const signInTemplate = require('./../templates/sign-in-form.handlebars')
 const userControlsTemplate = require('./../templates/user-controls.handlebars')
+const jumbotronTemplate = require('./../templates/jumbotron.handlebars')
 
 const loadSignUp = () => {
   const signUpHtml = signUpTemplate()
@@ -18,6 +19,11 @@ const loadSignIn = () => {
 const loadUserControls = () => {
   const userControlsHtml = userControlsTemplate()
   $('main').append(userControlsHtml)
+}
+
+const loadJumbotron = () => {
+  const loadJumbotronHtml = jumbotronTemplate()
+  $('main').append(loadJumbotronHtml)
 }
 
 const signUpSuccess = () => {
@@ -57,6 +63,7 @@ module.exports = {
   loadSignUp,
   loadSignIn,
   loadUserControls,
+  loadJumbotron,
   signUpSuccess,
   signUpFailure,
   signInSuccess,
