@@ -1,19 +1,13 @@
 'use strict'
 
 const store = require('./../store')
-const signUpTemplate = require('./../templates/sign-up-form.handlebars')
-const signInTemplate = require('./../templates/sign-in-form.handlebars')
+const authAccordionTemplate = require('./../templates/auth-accordion.handlebars')
 const userControlsTemplate = require('./../templates/user-controls.handlebars')
 const jumbotronTemplate = require('./../templates/jumbotron.handlebars')
 
-const loadSignUp = () => {
-  const signUpHtml = signUpTemplate()
-  $('main').append(signUpHtml)
-}
-
-const loadSignIn = () => {
-  const signInHtml = signInTemplate()
-  $('main').append(signInHtml)
+const loadAuthAccordion = () => {
+  const authAccordionHtml = authAccordionTemplate()
+  $('main').append(authAccordionHtml)
 }
 
 const loadUserControls = () => {
@@ -60,8 +54,7 @@ const signOutFailure = () => {
 }
 
 module.exports = {
-  loadSignUp,
-  loadSignIn,
+  loadAuthAccordion,
   loadUserControls,
   loadJumbotron,
   signUpSuccess,

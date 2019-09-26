@@ -6,8 +6,7 @@ const authUi = require('./ui')
 const surveyUi = require('./../survey/ui')
 
 const onLoad = () => {
-  authUi.loadSignUp()
-  authUi.loadSignIn()
+  authUi.loadAuthAccordion()
 }
 
 const onSignedIn = () => {
