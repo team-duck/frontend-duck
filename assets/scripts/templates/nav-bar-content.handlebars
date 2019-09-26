@@ -1,37 +1,33 @@
-<a class="navbar-brand" href="#">Resume Clips</a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
-<!-- refactor to use handlebars for the nave bar and sub components -->
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav mr-auto">
-    <li>
-      <button class="btn btn-outline-success my-2 my-sm-0 on-auth " id="sign-out">Sign Out</button>
-    </li>
-    <li class="nav-item dropdown on-auth ">
-      <a class="nav-link dropdown-toggle" href="#" id="signUpDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Change Password
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">What the DUCK?!</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#duck-navbar" aria-controls="duck-navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="duck-navbar">
+    <div class="navbar-nav mr-auto">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">All Surveys</a>
+      <a class="nav-item nav-link" href="#">My Surveys</a>
+      <button class="btn btn-sm btn-primary ml-auto" type="button">Create Survey</button>
+    </div>
+    <div class="navbar-nav">
+      <a class="nav-link dropdown-toggle" href="#" id="change-password-button" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Change password
       </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <form id="change-password" class="px-4 py-3">
+      <div class="dropdown-menu dropdown-menu-right p-4 " id="change-password-container" aria-labelledby="change-password-button">
+        <form id="change-password">
           <div class="form-group">
-            <label>Current Password</label>
-            <input type="password" class="form-control" name="passwords[old]" placeholder="Current Password">
+            <label for="old-password">Old Password</label>
+            <input type="password" class="form-control" id="old-password" name="passwords[old]" placeholder="Old Password">
           </div>
           <div class="form-group">
-            <label>New Password</label>
-            <input type="password" class="form-control" name="passwords[new]" placeholder="New Password">
+            <label for="new-password">New Password</label>
+            <input type="password" class="form-control" id="new-password" name="passwords[new]" placeholder="New Password">
           </div>
-          <button type="submit" class="btn btn-primary">Change Password</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
-    </li>
-  </ul>
-  <ul class="navbar-nav ml-auto">
-    <li>
-      <div id="user-info" class="on-auth ">
-        <div id="signed-in-user"></div>
-      </div>
-    </li>
-  </ul>
-</div>
+      <button class="btn btn-sm btn-primary ml-auto" type="button" id="signout-button">Sign Out</button>
+    </div>
+  </div>
+</nav>
