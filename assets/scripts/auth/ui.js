@@ -3,7 +3,7 @@
 const store = require('./../store')
 const navbarTemplate = require('./../templates/nav-bar-content.handlebars')
 const splashPageTemplate = require('./../templates/splash-page/splash-body.handlebars')
-const jumbotronTemplate = require('./../templates/jumbotron.handlebars')
+const mainPageTemplate = require('./../templates/main-page/main-body.handlebars')
 
 const loadNavbar = () => {
   const navbarHtml = navbarTemplate()
@@ -12,12 +12,12 @@ const loadNavbar = () => {
 
 const loadSplashPage = () => {
   const splashPageHtml = splashPageTemplate()
-  $('main').append(splashPageHtml)
+  $('main').html(splashPageHtml)
 }
 
-const loadJumbotron = () => {
-  const loadJumbotronHtml = jumbotronTemplate()
-  $('main').append(loadJumbotronHtml)
+const loadMainPage = () => {
+  const mainPageHtml = mainPageTemplate()
+  $('main').html(mainPageHtml)
 }
 
 const signUpSuccess = () => {
@@ -56,7 +56,7 @@ const signOutFailure = () => {
 module.exports = {
   loadNavbar,
   loadSplashPage,
-  loadJumbotron,
+  loadMainPage,
   signUpSuccess,
   signUpFailure,
   signInSuccess,
