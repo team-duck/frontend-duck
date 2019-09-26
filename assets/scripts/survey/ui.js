@@ -1,6 +1,18 @@
 'use strict'
 
 const store = require('./../store')
+const createSurveyTemplate = require('./../templates/create-survey-form.handlebars')
+const surveyControlsTemplate = require('./../templates/survey-controls.handlebars')
+
+const loadCreateSurvey = () => {
+  const userControlsHtml = createSurveyTemplate()
+  $('main').append(userControlsHtml)
+}
+
+const loadSurveyControls = () => {
+  const surveyControlsHtml = surveyControlsTemplate()
+  $('main').append(surveyControlsHtml)
+}
 
 const indexSurveySuccess = data => {
   console.log(data)
@@ -30,6 +42,8 @@ const createSurveyFailure = () => {
 }
 
 module.exports = {
+  loadCreateSurvey,
+  loadSurveyControls,
   indexSurveySuccess,
   indexSurveyFailure,
   showSurveySuccess,

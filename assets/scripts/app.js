@@ -12,6 +12,7 @@ const surveyEvents = require('./survey/events')
 
 $(() => {
   store.user = null
+  authEvents.onLoad()
   authEvents.addHandlers()
   surveyEvents.addHandlers()
 })
