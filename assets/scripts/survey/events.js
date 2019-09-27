@@ -82,11 +82,35 @@ const onShowSurvey = event => {
     .catch(ui.showSurveyFailure)
 }
 
+const onAnswerSurvey = event => {
+  event.preventDefault()
+
+  const data = getFormFields(event.target)
+
+  const surveyId = data.survey.id
+  delete data.survey
+
+  const questionsArray = []
+  for (const key in data) {
+    const obj = data[key]
+    questionsArray.push(obj)
+  }
+
+  const responsePojo = {
+    answers: questionsArray
+  }
+
+  api.answerSurvey(surveyId, responsePojo)
+    .then(console.log)
+    .catch(console.error)
+}
+
 const addHandlers = () => {
   $('#all-surveys-link').onclick = onIndexSurvey
   $('main').on('click', '#index-surveys-button', onIndexSurvey)
   $('main').on('submit', '#show-survey', onShowSurvey)
   $('main').on('submit', '#create-survey', onCreateSurvey)
+  $('main').on('submit', '#survey-form', onAnswerSurvey)
   socket.on('message', onSocketIndex) // listens for an event from the server with the label 'message'
 }
 
