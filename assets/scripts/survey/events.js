@@ -83,6 +83,7 @@ const onShowSurvey = event => {
 }
 
 const addHandlers = () => {
+  $('#all-surveys-link').onclick = onIndexSurvey
   $('main').on('click', '#index-surveys-button', onIndexSurvey)
   $('main').on('submit', '#show-survey', onShowSurvey)
   $('main').on('submit', '#create-survey', onCreateSurvey)
