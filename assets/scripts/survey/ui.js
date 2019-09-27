@@ -2,7 +2,7 @@
 
 const store = require('./../store')
 const createSurveyTemplate = require('./../templates/create-survey-form.handlebars')
-const showSurveysTemplate = require('./../templates/surveys-page/survey-preview.handlebars')
+const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
 
 const loadCreateSurvey = () => {
   const createSurveyHtml = createSurveyTemplate()
@@ -11,7 +11,7 @@ const loadCreateSurvey = () => {
 
 const indexSurveySuccess = data => {
   const showSurveysHtml = showSurveysTemplate({ surveys: data.surveys })
-  $('#survey-row').append(showSurveysHtml)
+  $('main').html(showSurveysHtml)
 }
 
 const indexSurveyFailure = () => {
