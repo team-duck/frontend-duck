@@ -7,7 +7,7 @@ const mainPageTemplate = require('./../templates/main-page/main-body.handlebars'
 
 const loadNavbar = () => {
   const navbarHtml = navbarTemplate()
-  $('nav').html(navbarHtml)
+  $('header').html(navbarHtml)
 }
 
 const loadSplashPage = () => {

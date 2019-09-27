@@ -6,14 +6,13 @@ const authUi = require('./ui')
 const surveyUi = require('./../survey/ui')
 
 const onLoad = () => {
-  authUi.loadNavbar()
   authUi.loadSplashPage()
 }
 
 const onSignedIn = () => {
+  authUi.loadNavbar()
   authUi.loadMainPage()
   surveyUi.loadCreateSurvey()
-  surveyUi.loadSurveyControls()
 }
 
 const onSignUp = event => {
@@ -60,6 +59,7 @@ const addHandlers = () => {
   $('#sign-in').on('submit', onSignIn)
   $('#change-password').on('submit', onChangePassword)
   $('nav').on('click', '#signout-button', onSignOut)
+  $('#home-link').onclick = authUi.loadMainPage
 }
 
 module.exports = {
