@@ -3,7 +3,8 @@
 const store = require('./../store')
 const createSurveyTemplate = require('./../templates/create-survey/create-survey-form.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
-const chartData = require('./../../../lib/chart')
+// const chartData = require('./../../../lib/chart')
+const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
 
 const loadCreateSurvey = () => {
   const createSurveyHtml = createSurveyTemplate()
@@ -32,7 +33,23 @@ const showSurveyResults = data => {
 
 const viewSurveySuccess = data => {
   // $('#survey-status').append(`<p>${JSON.stringify(data)}</p>`)
-  const options = chartData(data.survey)[0]
+  // const options = chartData(data.survey)[0]
+  const options = {
+    animationEnabled: true,
+    title: {
+      text: 'test'
+    },
+    axisY: {
+      title: 'User responses',
+      suffix: '',
+      includeZero: true
+    },
+    axisX: {
+      title: 'Responses'
+    },
+    data: []
+  }
+  console.log('Options from ui.js ', options)
   $('#chartContainer').CanvasJSChart(options)
 }
 
