@@ -65,9 +65,9 @@ const onShowSurvey = event => {
 const onViewResults = event => {
   event.preventDefault()
 
-  const data = getFormFields(event.target)
+  const id = $(event.target).data().id
 
-  api.showSurvey(data.survey.id)
+  api.showSurvey(id)
     .then(ui.showSurveyResults)
     .catch(ui.showSurveyFailure)
 }
@@ -104,6 +104,14 @@ const onAnswerSurvey = event => {
     .catch(console.error)
 }
 
+const onSeeResults = () => {
+  // event.preventDefault()
+  console.log('inside onSeeResults')
+  // const data = getFormFields(event.target)
+  api.showSurvey('5d8bda85a675551a93f9d5f2')
+    .then(ui.viewSurveySuccess)
+    .catch(ui.failure)
+}
 const addHandlers = () => {
   $('header').on('click', '#all-surveys-link', onIndexSurvey)
   $('main').on('submit', '#show-survey', onShowSurvey)
@@ -113,6 +121,7 @@ const addHandlers = () => {
   $('main').on('click', '.edit-btn', onEditSurvey)
   $('main').on('click', '.results-btn', onViewResults)
   $('main').on('click', '.respond-btn', onRespondSurvey)
+  $('body').on('click', '#test-chart', onSeeResults)
   socket.on('message', onSocketIndex) // listens for an event from the server with the label 'message'
 }
 
@@ -120,5 +129,6 @@ module.exports = {
   onIndexSurvey,
   onShowSurvey,
   onCreateSurvey,
+  onSeeResults,
   addHandlers
 }
