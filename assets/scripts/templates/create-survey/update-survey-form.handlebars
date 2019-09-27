@@ -6,16 +6,16 @@
   </div>
 
   <div class="modal-body">
-    <form id="create-survey">
+    <form id="update-survey">
       <div class="form-group">
         <label for="survey-title">Survey Title</label>
-        <input type="hidden" name="survey[id]" value="{{surveyId}}">
-        <input type="text" class="form-control" id="survey-title" name="survey[title]" placeholder="{{survey.title}}">
+        <input type="hidden" name="survey[id]" value="{{survey._id}}">
+        <input type="text" class="form-control" id="survey-title" name="survey[title]" value="{{survey.title}}">
       </div>
-      {{#each survey.questions as |question| survey._id as |surveyId| }}
-        {{> update-question question=question surveyId=surveyId }}
+      {{#each survey.questions as |question| }}
+        {{> update-question question=question}}
       {{/each}}
-      <button type="submit" class="btn btn-primary">Create Survey</button>
+      <button type="submit" class="btn btn-primary">Update Survey</button>
       <button type="submit" class="btn btn-primary">Add another question</button>
     </form>
   </div>

@@ -39,7 +39,11 @@ const onDeleteSurvey = event => {
 
 const onEditSurvey = event => {
   event.preventDefault()
-  console.log('edit clicked', $(event.target).data())
+
+  const id = $(event.target).data().id
+  api.showSurvey(id)
+    .then(ui.updateSurveyModal)
+    .catch(ui.updateSurveyModal)
 }
 const onCreateSurvey = event => {
   event.preventDefault()
@@ -48,6 +52,19 @@ const onCreateSurvey = event => {
   const surveyPojo = processSurveyData(data)
 
   api.createSurvey(surveyPojo)
+    .then(ui.createSurveySuccess)
+    .catch(ui.createSurveyFailure)
+}
+const onUpdateSurvey = event => {
+  event.preventDefault()
+
+  const data = getFormFields(event.target)
+  console.log('clickUpdate', data)
+  const id = data.survey.id
+  delete data.survey.id
+  const surveyPojo = processSurveyData(data)
+
+  api.updateSurvey(id, surveyPojo)
     .then(ui.createSurveySuccess)
     .catch(ui.createSurveyFailure)
 }
@@ -116,6 +133,7 @@ const addHandlers = () => {
   $('header').on('click', '#all-surveys-link', onIndexSurvey)
   $('main').on('submit', '#show-survey', onShowSurvey)
   $('main').on('submit', '#create-survey', onCreateSurvey)
+  $('main').on('submit', '#update-survey', onUpdateSurvey)
   $('main').on('submit', '#survey-form', onAnswerSurvey)
   $('main').on('click', '.delete-btn', onDeleteSurvey)
   $('main').on('click', '.edit-btn', onEditSurvey)
