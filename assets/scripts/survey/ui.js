@@ -3,12 +3,14 @@
 const store = require('./../store')
 const createSurveyTemplate = require('./../templates/create-survey/create-survey-form.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
+const updateSurveyTemplate = require('./../templates/create-survey/update-survey-form.handlebars')
+
 const chartData = require('./../../../lib/chart')
 const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
 
 const loadCreateSurvey = () => {
   const createSurveyHtml = createSurveyTemplate()
-  $('.modal-container').append(createSurveyHtml)
+  $('.custom-modal-forms').html(createSurveyHtml)
 }
 
 const indexSurveySuccess = data => {
@@ -61,6 +63,12 @@ const showSurveyFailure = () => {
   $('#survey-status').text('Survey not retrieved!')
 }
 
+const updateSurveyModal = data => {
+
+  const updateSurveyHtml = updateSurveyTemplate({survey: data.survey})
+  $('.custom-modal-forms').html(updateSurveyHtml)
+  $('#create-survey-modal').modal('toggle')
+}
 const createSurveySuccess = () => {
   $('form').trigger('reset')
   $('#create-survey-modal').modal('toggle')
@@ -79,6 +87,7 @@ module.exports = {
   createSurveySuccess,
   createSurveyFailure,
   showSurveyResults,
+  updateSurveyModal,
   respondToSurvey,
   viewSurveySuccess,
   store

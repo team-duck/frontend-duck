@@ -42,9 +42,9 @@ const createSurvey = data => {
   })
 }
 
-const updateSurvey = data => {
+const updateSurvey = (id, data) => {
   return $.ajax({
-    url: config.apiUrl + '/surveys',
+    url: config.apiUrl + '/surveys/' + id,
     method: 'PATCH',
     headers: {
       Authorization: 'bearer ' + store.user.token
