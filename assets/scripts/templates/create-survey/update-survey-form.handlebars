@@ -1,0 +1,22 @@
+
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="create-survey-label">Update Survey!</h5>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form id="create-survey">
+      <div class="form-group">
+        <label for="survey-title">Survey Title</label>
+        <input type="hidden" name="survey[id]" value="{{surveyId}}">
+        <input type="text" class="form-control" id="survey-title" name="survey[title]" placeholder="{{survey.title}}">
+      </div>
+      {{#each survey.questions as |question| survey._id as |surveyId| }}
+        {{> update-question question=question surveyId=surveyId }}
+      {{/each}}
+      <button type="submit" class="btn btn-primary">Create Survey</button>
+      <button type="submit" class="btn btn-primary">Add another question</button>
+    </form>
+  </div>
+</div>

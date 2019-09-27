@@ -8,7 +8,7 @@ const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
 
 const loadCreateSurvey = () => {
   const createSurveyHtml = createSurveyTemplate()
-  $('.modal-container').append(createSurveyHtml)
+  $('.custom-modal-forms').html(createSurveyHtml)
 }
 
 const indexSurveySuccess = data => {
