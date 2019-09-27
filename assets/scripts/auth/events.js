@@ -6,14 +6,13 @@ const authUi = require('./ui')
 const surveyUi = require('./../survey/ui')
 
 const onLoad = () => {
-  authUi.loadNavbar()
   authUi.loadSplashPage()
 }
 
 const onSignedIn = () => {
+  authUi.loadNavbar()
   authUi.loadMainPage()
   surveyUi.loadCreateSurvey()
-  surveyUi.loadSurveyControls()
 }
 
 const onSignUp = event => {

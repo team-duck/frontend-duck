@@ -2,17 +2,11 @@
 
 const store = require('./../store')
 const createSurveyTemplate = require('./../templates/create-survey-form.handlebars')
-const surveyControlsTemplate = require('./../templates/surveys-page/survey-controls.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/survey-preview.handlebars')
 
 const loadCreateSurvey = () => {
-  const userControlsHtml = createSurveyTemplate()
-  $('main').append(userControlsHtml)
-}
-
-const loadSurveyControls = () => {
-  const surveyControlsHtml = surveyControlsTemplate()
-  $('main').append(surveyControlsHtml)
+  const createSurveyHtml = createSurveyTemplate()
+  $('main').append(createSurveyHtml)
 }
 
 const indexSurveySuccess = data => {
@@ -42,7 +36,6 @@ const createSurveyFailure = () => {
 
 module.exports = {
   loadCreateSurvey,
-  loadSurveyControls,
   indexSurveySuccess,
   indexSurveyFailure,
   showSurveySuccess,
