@@ -26,7 +26,15 @@ const onSocketIndex = message => {
     })
     .catch(ui.indexSurveyFailure)
 }
+const onDeleteSurvey = event => {
+  event.preventDefault()
+  console.log('delete clicked', $(event.target).data())
+}
 
+const onEditSurvey = event => {
+  event.preventDefault()
+  console.log('edit clicked', $(event.target).data())
+}
 const onCreateSurvey = event => {
   event.preventDefault()
 
@@ -78,6 +86,25 @@ const onShowSurvey = event => {
   const data = getFormFields(event.target)
 
   api.showSurvey(data.survey.id)
+    .then(ui.respondToSurvey)
+    .catch(ui.showSurveyFailure)
+}
+
+const onViewResults = event => {
+  event.preventDefault()
+
+  const data = getFormFields(event.target)
+
+  api.showSurvey(data.survey.id)
+    .then(ui.showSurveyResults)
+    .catch(ui.showSurveyFailure)
+}
+const onRespondSurvey = event => {
+  event.preventDefault()
+
+  const data = getFormFields(event.target)
+
+  api.showSurvey(data.survey.id)
     .then(ui.showSurveySuccess)
     .catch(ui.showSurveyFailure)
 }
@@ -106,11 +133,14 @@ const onAnswerSurvey = event => {
 }
 
 const addHandlers = () => {
-  $('#all-surveys-link').onclick = onIndexSurvey
-  $('main').on('click', '#index-surveys-button', onIndexSurvey)
+  $('header').on('click', '#all-surveys-link', onIndexSurvey)
   $('main').on('submit', '#show-survey', onShowSurvey)
   $('main').on('submit', '#create-survey', onCreateSurvey)
   $('main').on('submit', '#survey-form', onAnswerSurvey)
+  $('main').on('click', '.delete-btn', onDeleteSurvey)
+  $('main').on('click', '.edit-btn', onEditSurvey)
+  $('main').on('click', '.results-btn', onViewResults)
+  $('main').on('click', '.respond-btn', onRespondSurvey)
   socket.on('message', onSocketIndex) // listens for an event from the server with the label 'message'
 }
 

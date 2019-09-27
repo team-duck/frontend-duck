@@ -8,8 +8,8 @@
 
         <p>{{question.title}}</p>
       {{/each}}
-      <a href="#" class="btn btn-primary" data-id="{{survey._id}}">Respond</a>
-      <a href="#" class="btn btn-primary">Results</a>
+      <a href="#" class="btn btn-primary respond-btn" data-id="{{survey._id}}">Respond</a>
+      <a href="#" class="btn btn-primary results-btn" data-id="{{survey._id}}">Results</a>
       {{#if (ownership survey.owner) }}
         {{> delete survey = survey}}
         {{> edit survey = survey}}

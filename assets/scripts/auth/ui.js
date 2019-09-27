@@ -4,6 +4,7 @@ const store = require('./../store')
 const navbarTemplate = require('./../templates/nav-bar-content.handlebars')
 const splashPageTemplate = require('./../templates/splash-page/splash-body.handlebars')
 const mainPageTemplate = require('./../templates/main-page/main-body.handlebars')
+const emptyNavTemplate = require('./../templates/splash-page/empty-navbar.handlebars')
 
 const loadNavbar = () => {
   const navbarHtml = navbarTemplate()
@@ -46,7 +47,11 @@ const changePasswordFailure = () => {
 }
 
 const signOutSuccess = data => {
-  $('#auth-status').text('Signed out!')
+  store.user = null
+  const splashPageHtml = splashPageTemplate()
+  $('main').html(splashPageHtml)
+  const navbarHtml = emptyNavTemplate()
+  $('header').html(navbarHtml)
 }
 
 const signOutFailure = () => {

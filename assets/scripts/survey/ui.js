@@ -6,12 +6,12 @@ const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.ha
 
 const loadCreateSurvey = () => {
   const createSurveyHtml = createSurveyTemplate()
-  $('main').append(createSurveyHtml)
+  $('.modal-container').append(createSurveyHtml)
 }
 
 const indexSurveySuccess = data => {
   const showSurveysHtml = showSurveysTemplate({ surveys: data.surveys })
-  $('main').html(showSurveysHtml)
+  $('#view').html(showSurveysHtml)
 }
 
 const indexSurveyFailure = () => {
@@ -20,6 +20,12 @@ const indexSurveyFailure = () => {
 
 const showSurveySuccess = data => {
   $('#survey-status').append(`<p>${JSON.stringify(data)}</p>`)
+}
+const respondToSurvey = data => {
+  console.log('respondToSurvey', data)
+}
+const showSurveyResults = data => {
+  console.log('showSurveyResults', data)
 }
 
 const showSurveyFailure = () => {
@@ -42,5 +48,7 @@ module.exports = {
   showSurveyFailure,
   createSurveySuccess,
   createSurveyFailure,
+  showSurveyResults,
+  respondToSurvey,
   store
 }
