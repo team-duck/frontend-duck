@@ -88,14 +88,15 @@ const onViewResults = event => {
     .then(ui.showSurveyResults)
     .catch(ui.showSurveyFailure)
 }
+
 const onRespondSurvey = event => {
   event.preventDefault()
 
-  const data = getFormFields(event.target)
+  const id = $(event.target).data().id
 
-  api.showSurvey(data.survey.id)
-    .then(ui.showSurveySuccess)
-    .catch(ui.showSurveyFailure)
+  api.showSurvey(id) // open modal
+    .then(ui.loadRespondSurvey) // change
+    .catch(ui.showSurveyFailure) // change
 }
 
 const onAnswerSurvey = event => {

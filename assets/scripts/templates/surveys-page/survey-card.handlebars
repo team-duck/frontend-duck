@@ -1,17 +1,31 @@
+<!-- BOOTSTRAP MODALS TRANSFER  -->
+<div class="modal fade" id="respond-survey-modal" tabindex="-1" role="dialog" aria-labelledby="respond-survey-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="respond-survey-label">Respond to Survey</h5>
+        </button>
+      </div>
 
-<div class="col-3">
-  <div class="card survey-card">
-    <div class="card-header">
-      {{survey.title}}
-    </div>
-    <div class="card-body">
-      <form id="survey-form">
-        {{#each survey.questions as |question| survey._id as |surveyId| }}
-          {{> survey-question question=question surveyId=surveyId }}
-        {{/each}}
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-      <a href="#" class="btn btn-primary">Results</a>
+      <div class="modal-body">
+        <div class="col">
+          <div class="card survey-card">
+            <div class="card-header">
+              {{survey.title}}
+            </div>
+            <div class="card-body">
+              <form id="survey-form">
+                <input type="hidden" name="survey[id]" value="{{survey._id}}">
+                {{#each survey.questions as |question| }}
+                  {{> survey-question question=question }}
+                {{/each}}
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+              <a href="#" class="btn btn-primary">Results</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
