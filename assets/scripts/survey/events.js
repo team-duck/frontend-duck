@@ -65,9 +65,9 @@ const onShowSurvey = event => {
 const onViewResults = event => {
   event.preventDefault()
 
-  const data = getFormFields(event.target)
+  const id = $(event.target).data().id
 
-  api.showSurvey(data.survey.id)
+  api.showSurvey(id)
     .then(ui.showSurveyResults)
     .catch(ui.showSurveyFailure)
 }

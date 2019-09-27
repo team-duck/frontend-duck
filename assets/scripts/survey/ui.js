@@ -3,7 +3,7 @@
 const store = require('./../store')
 const createSurveyTemplate = require('./../templates/create-survey/create-survey-form.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
-// const chartData = require('./../../../lib/chart')
+const chartData = require('./../../../lib/chart')
 const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
 
 const loadCreateSurvey = () => {
@@ -29,6 +29,10 @@ const respondToSurvey = data => {
 }
 const showSurveyResults = data => {
   console.log('showSurveyResults', data)
+  const options = chartData(data.survey)[0]
+
+  console.log('Options from ui.js ', options)
+  $('#chartContainer').CanvasJSChart(options)
 }
 
 const viewSurveySuccess = data => {
