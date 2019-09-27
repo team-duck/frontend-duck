@@ -22,15 +22,18 @@ const loadMainPage = () => {
 }
 
 const signUpSuccess = () => {
+  $('form').trigger('reset')
   $('#auth-status').text('Signed up!')
 }
 
 const signUpFailure = () => {
+  $('form').trigger('reset')
   $('#auth-status').text('Not signed up!')
 }
 
 const signInSuccess = data => {
   store.user = data.user
+  $('form').trigger('reset')
   $('#auth-status').text('Signed in!')
 }
 
@@ -39,10 +42,12 @@ const signInFailure = () => {
 }
 
 const changePasswordSuccess = data => {
+  $('form').trigger('reset')
   $('#auth-status').text('Changed password!')
 }
 
 const changePasswordFailure = () => {
+  $('form').trigger('reset')
   $('#auth-status').text('Didnt change password!')
 }
 

@@ -1,7 +1,7 @@
 'use strict'
 
 const store = require('./../store')
-const createSurveyTemplate = require('./../templates/create-survey-form.handlebars')
+const createSurveyTemplate = require('./../templates/create-survey/create-survey-form.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
 
 const loadCreateSurvey = () => {
@@ -33,7 +33,8 @@ const showSurveyFailure = () => {
 }
 
 const createSurveySuccess = () => {
-  $('#survey-status').text('Survey created!')
+  $('form').trigger('reset')
+  $('#create-survey-modal').modal('toggle')
 }
 
 const createSurveyFailure = () => {
