@@ -32,8 +32,20 @@ const createSurvey = data => {
   })
 }
 
+const answerSurvey = (surveyId, response) => {
+  return $.ajax({
+    url: config.apiUrl + '/response/' + surveyId,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'bearer ' + store.user.token
+    },
+    data: response
+  })
+}
+
 module.exports = {
   indexSurvey,
   showSurvey,
-  createSurvey
+  createSurvey,
+  answerSurvey
 }

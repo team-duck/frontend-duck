@@ -1,4 +1,6 @@
+<input type="hidden" name="survey[id]" value="{{surveyId}}">
 <h5 class="card-title">{{question.text}}</h5>
+<input type="hidden" name="question{{@index}}[id]" value="{{question._id}}">
 {{#each question.responses as |response|}}
   {{> question-response response=response }}
 {{/each}}

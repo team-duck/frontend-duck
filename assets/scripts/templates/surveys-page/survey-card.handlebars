@@ -1,14 +1,16 @@
 
 <div class="col-3">
-  <div class="card">
+  <div class="card survey-card">
     <div class="card-header">
       {{survey.title}}
     </div>
     <div class="card-body">
-      {{#each survey.questions as |question|}}
-        {{> survey-question question=question }}
-      {{/each}}
-      <a href="#" class="btn btn-primary">Respond</a>
+      <form id="survey-form">
+        {{#each survey.questions as |question| survey._id as |surveyId| }}
+          {{> survey-question question=question surveyId=surveyId }}
+        {{/each}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
       <a href="#" class="btn btn-primary">Results</a>
     </div>
   </div>
