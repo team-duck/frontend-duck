@@ -1,6 +1,7 @@
 'use strict'
 
 const store = require('./../store')
+const surveyUi = require('./../survey/ui.js')
 const navbarTemplate = require('./../templates/nav-bar-content.handlebars')
 const splashPageTemplate = require('./../templates/splash-page/splash-body.handlebars')
 const mainPageTemplate = require('./../templates/main-page/main-body.handlebars')
@@ -19,6 +20,7 @@ const loadSplashPage = () => {
 const loadMainPage = () => {
   const mainPageHtml = mainPageTemplate()
   $('main').html(mainPageHtml)
+  surveyUi.loadCreateSurvey()
 }
 
 const signUpSuccess = () => {
