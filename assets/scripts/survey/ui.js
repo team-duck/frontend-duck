@@ -2,8 +2,8 @@
 
 const store = require('./../store')
 const createSurveyTemplate = require('./../templates/create-survey-form.handlebars')
-const surveyControlsTemplate = require('./../templates/survey-controls.handlebars')
-const showSurveysTemplate = require('./../templates/survey-preview.handlebars')
+const surveyControlsTemplate = require('./../templates/surveys-page/survey-controls.handlebars')
+const showSurveysTemplate = require('./../templates/surveys-page/survey-preview.handlebars')
 
 const loadCreateSurvey = () => {
   const userControlsHtml = createSurveyTemplate()
