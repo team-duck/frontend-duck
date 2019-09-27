@@ -59,7 +59,7 @@ const addHandlers = () => {
   $('main').on('submit', '#sign-in', onSignIn)
   $('main').on('submit', '#change-password', onChangePassword)
   $('header').on('click', '#signout-button', onSignOut)
-  $('#home-link').onclick = authUi.loadMainPage
+  $('header').on('click', '#home-link', authUi.loadMainPage)
 }
 
 module.exports = {
