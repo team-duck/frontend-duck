@@ -4,6 +4,7 @@ const store = require('./../store')
 const navbarTemplate = require('./../templates/nav-bar-content.handlebars')
 const splashPageTemplate = require('./../templates/splash-page/splash-body.handlebars')
 const mainPageTemplate = require('./../templates/main-page/main-body.handlebars')
+const emptyNavTemplate = require('./../templates/splash-page/empty-navbar.handlebars')
 
 const loadNavbar = () => {
   const navbarHtml = navbarTemplate()
@@ -21,15 +22,18 @@ const loadMainPage = () => {
 }
 
 const signUpSuccess = () => {
+  $('form').trigger('reset')
   $('#auth-status').text('Signed up!')
 }
 
 const signUpFailure = () => {
+  $('form').trigger('reset')
   $('#auth-status').text('Not signed up!')
 }
 
 const signInSuccess = data => {
   store.user = data.user
+  $('form').trigger('reset')
   $('#auth-status').text('Signed in!')
 }
 
@@ -38,15 +42,21 @@ const signInFailure = () => {
 }
 
 const changePasswordSuccess = data => {
+  $('form').trigger('reset')
   $('#auth-status').text('Changed password!')
 }
 
 const changePasswordFailure = () => {
+  $('form').trigger('reset')
   $('#auth-status').text('Didnt change password!')
 }
 
 const signOutSuccess = data => {
-  $('#auth-status').text('Signed out!')
+  store.user = null
+  const splashPageHtml = splashPageTemplate()
+  $('main').html(splashPageHtml)
+  const navbarHtml = emptyNavTemplate()
+  $('header').html(navbarHtml)
 }
 
 const signOutFailure = () => {

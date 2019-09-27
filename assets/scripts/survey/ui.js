@@ -1,17 +1,17 @@
 'use strict'
 
 const store = require('./../store')
-const createSurveyTemplate = require('./../templates/create-survey-form.handlebars')
+const createSurveyTemplate = require('./../templates/create-survey/create-survey-form.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
 
 const loadCreateSurvey = () => {
   const createSurveyHtml = createSurveyTemplate()
-  $('main').append(createSurveyHtml)
+  $('.modal-container').append(createSurveyHtml)
 }
 
 const indexSurveySuccess = data => {
   const showSurveysHtml = showSurveysTemplate({ surveys: data.surveys })
-  $('main').html(showSurveysHtml)
+  $('#view').html(showSurveysHtml)
 }
 
 const indexSurveyFailure = () => {
@@ -21,13 +21,20 @@ const indexSurveyFailure = () => {
 const showSurveySuccess = data => {
   $('#survey-status').append(`<p>${JSON.stringify(data)}</p>`)
 }
+const respondToSurvey = data => {
+  console.log('respondToSurvey', data)
+}
+const showSurveyResults = data => {
+  console.log('showSurveyResults', data)
+}
 
 const showSurveyFailure = () => {
   $('#survey-status').text('Survey not retrieved!')
 }
 
 const createSurveySuccess = () => {
-  $('#survey-status').text('Survey created!')
+  $('form').trigger('reset')
+  $('#create-survey-modal').modal('toggle')
 }
 
 const createSurveyFailure = () => {
@@ -42,5 +49,7 @@ module.exports = {
   showSurveyFailure,
   createSurveySuccess,
   createSurveyFailure,
+  showSurveyResults,
+  respondToSurvey,
   store
 }
