@@ -3,6 +3,7 @@
 const store = require('./../store')
 const createSurveyTemplate = require('./../templates/create-survey/create-survey-form.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
+const chartData = require('./../../../lib/chart')
 
 const loadCreateSurvey = () => {
   const createSurveyHtml = createSurveyTemplate()
@@ -21,11 +22,18 @@ const indexSurveyFailure = () => {
 const showSurveySuccess = data => {
   $('#survey-status').append(`<p>${JSON.stringify(data)}</p>`)
 }
+
 const respondToSurvey = data => {
   console.log('respondToSurvey', data)
 }
 const showSurveyResults = data => {
   console.log('showSurveyResults', data)
+}
+
+const viewSurveySuccess = data => {
+  // $('#survey-status').append(`<p>${JSON.stringify(data)}</p>`)
+  const options = chartData(data.survey)[0]
+  $('#chartContainer').CanvasJSChart(options)
 }
 
 const showSurveyFailure = () => {
@@ -51,5 +59,6 @@ module.exports = {
   createSurveyFailure,
   showSurveyResults,
   respondToSurvey,
+  viewSurveySuccess,
   store
 }
