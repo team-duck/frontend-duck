@@ -8,7 +8,9 @@ const socket = require('socket.io-client')(apiUrl)
 const store = require('../store')
 
 const onIndexSurvey = event => {
-  event.preventDefault()
+  if (event) {
+    event.preventDefault()
+  }
   api.indexSurvey()
     .then(ui.indexSurveySuccess)
     .catch(ui.indexSurveyFailure)
@@ -28,7 +30,10 @@ const onSocketIndex = message => {
 }
 const onDeleteSurvey = event => {
   event.preventDefault()
-  console.log('delete clicked', $(event.target).data())
+  const id = $(event.target).data().id
+  api.deleteSurvey(id)
+    .then(onIndexSurvey)
+    .catch(ui.indexSurveyFailure)
 }
 
 const onEditSurvey = event => {
