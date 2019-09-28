@@ -56,7 +56,7 @@ const onSignOut = event => {
 const addHandlers = () => {
   $('main').on('submit', '#sign-up', onSignUp)
   $('main').on('submit', '#sign-in', onSignIn)
-  $('main').on('submit', '#change-password', onChangePassword)
+  $('header').on('submit', '#change-password', onChangePassword)
   $('header').on('click', '#signout-button', onSignOut)
   $('header').on('click', '#home-link', authUi.loadMainPage)
 }
