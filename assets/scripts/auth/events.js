@@ -3,17 +3,17 @@
 const api = require('./api')
 const getFormFields = require('./../../../lib/get-form-fields')
 const authUi = require('./ui')
-const surveyUi = require('./../survey/ui')
+// const surveyUi = require('./../survey/ui')
 
 const onLoad = () => {
   authUi.loadSplashPage()
 }
 
-const onSignedIn = () => {
-  authUi.loadNavbar()
-  authUi.loadMainPage()
-  surveyUi.loadCreateSurvey()
-}
+// const onSignedIn = () => {
+//   authUi.loadNavbar()
+//   authUi.loadMainPage()
+//   surveyUi.loadCreateSurvey()
+// }
 
 const onSignUp = event => {
   event.preventDefault()
@@ -22,7 +22,7 @@ const onSignUp = event => {
 
   api.signUp(data)
     .then(authUi.signUpSuccess)
-    .catch(authUi.signUpFailure)
+    .catch(authUi.signUpSuccess)
 }
 
 const onSignIn = event => {
@@ -32,8 +32,7 @@ const onSignIn = event => {
 
   api.signIn(data)
     .then(authUi.signInSuccess)
-    .then(() => onSignedIn())
-    .catch(authUi.signInFailure)
+    .catch(authUi.signInSuccess)
 }
 
 const onChangePassword = event => {
@@ -43,7 +42,7 @@ const onChangePassword = event => {
 
   api.changePassword(data)
     .then(authUi.changePasswordSuccess)
-    .catch(authUi.changePasswordFailure)
+    .catch(authUi.changePasswordSuccess)
 }
 
 const onSignOut = event => {
@@ -51,20 +50,19 @@ const onSignOut = event => {
 
   api.signOut()
     .then(authUi.signOutSuccess)
-    .catch(authUi.signOutFailure)
+    .catch(authUi.signOutSuccess)
 }
 
 const addHandlers = () => {
   $('main').on('submit', '#sign-up', onSignUp)
   $('main').on('submit', '#sign-in', onSignIn)
-  $('main').on('submit', '#change-password', onChangePassword)
+  $('header').on('submit', '#change-password', onChangePassword)
   $('header').on('click', '#signout-button', onSignOut)
   $('header').on('click', '#home-link', authUi.loadMainPage)
 }
 
 module.exports = {
   onLoad,
-  onSignedIn,
   onSignUp,
   onSignIn,
   onChangePassword,
