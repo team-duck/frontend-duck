@@ -41,35 +41,38 @@ const showSurveyResults = data => {
   $('#chartContainer').CanvasJSChart(options)
 }
 
-const viewSurveySuccess = data => {
-  // $('#survey-status').append(`<p>${JSON.stringify(data)}</p>`)
-  // const options = chartData(data.survey)[0]
-  const options = {
-    animationEnabled: true,
-    title: {
-      text: 'test'
-    },
-    axisY: {
-      title: 'User responses',
-      suffix: '',
-      includeZero: true
-    },
-    axisX: {
-      title: 'Responses'
-    },
-    data: []
-  }
-}
+// const viewSurveySuccess = data => {
+//   const options = {
+//     animationEnabled: true,
+//     title: {
+//       text: 'test'
+//     },
+//     axisY: {
+//       title: 'User responses',
+//       suffix: '%',
+//       includeZero: true
+//     },
+//     axisX: {
+//       suffix: '',
+//       title: 'Responses'
+//     },
+//     data: []
+//   }
+// }
 
 const showSurveyFailure = () => {
   $('#survey-status').text('Survey not retrieved!')
 }
 
-const updateSurveyModal = data => {
+const updateSurveyModal = (data) => {
 
   const updateSurveyHtml = updateSurveyTemplate({survey: data.survey})
   $('.custom-modal-forms').html(updateSurveyHtml)
   $('#create-survey-modal').modal('toggle')
+}
+const updateSurveyFailure = () => {
+  // $('#create-survey-modal').text('Survey not updated!')
+  console.log('survey not updated')
 }
 const createSurveySuccess = () => {
   $('form').trigger('reset')
@@ -90,7 +93,8 @@ module.exports = {
   createSurveyFailure,
   showSurveyResults,
   updateSurveyModal,
+  updateSurveyFailure,
   respondToSurvey,
-  viewSurveySuccess,
+  // viewSurveySuccess,
   store
 }

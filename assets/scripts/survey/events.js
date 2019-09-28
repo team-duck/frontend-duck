@@ -39,11 +39,10 @@ const onDeleteSurvey = event => {
 
 const onEditSurvey = event => {
   event.preventDefault()
-
   const id = $(event.target).data().id
   api.showSurvey(id)
     .then(ui.updateSurveyModal)
-    .catch(ui.updateSurveyModal)
+    .catch(ui.updateSurveyFailure)
 }
 const onCreateSurvey = event => {
   event.preventDefault()
@@ -55,18 +54,19 @@ const onCreateSurvey = event => {
     .then(ui.createSurveySuccess)
     .catch(ui.createSurveyFailure)
 }
-const onUpdateSurvey = event => {
+// remove parenthesis in event
+const onUpdateSurvey = (event) => {
   event.preventDefault()
-
+  // remove line 62
   const data = getFormFields(event.target)
-  console.log('clickUpdate', data)
+  // console.log('clickUpdate', data)
   const id = data.survey.id
   delete data.survey.id
   const surveyPojo = processSurveyData(data)
-
+  // added ui in then and catch
   api.updateSurvey(id, surveyPojo)
-    .then(ui.createSurveySuccess)
-    .catch(ui.createSurveyFailure)
+    .then(ui.updateSurveyModal)
+    .catch(ui.updateSurveyFailure)
 }
 
 const onShowSurvey = event => {
