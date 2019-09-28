@@ -2,6 +2,7 @@
 
 const store = require('./../store')
 const surveyUi = require('./../survey/ui.js')
+const handleResponse = require('./../common/handleResponse')
 const navbarTemplate = require('./../templates/nav-bar-content.handlebars')
 const splashPageTemplate = require('./../templates/splash-page/splash-body.handlebars')
 const mainPageTemplate = require('./../templates/main-page/main-body.handlebars')
@@ -23,58 +24,65 @@ const loadMainPage = () => {
   surveyUi.loadCreateSurvey()
 }
 
-const signUpSuccess = () => {
+const signUpSuccess = response => {
+  const action = ['signUp', 'danger', 'success']
+  handleResponse(response, action)
   $('form').trigger('reset')
-  $('#auth-status').text('Signed up!')
 }
 
-const signUpFailure = () => {
+// const signUpFailure = () => {
+//   $('form').trigger('reset')
+//   $('#auth-status').text('Not signed up!')
+// }
+
+const signInSuccess = response => {
+  const action = ['signIn', 'danger', 'success']
+  handleResponse(response, action, () => {
+    // should bring in the function sfrom on signedIn
+    loadNavbar()
+    loadMainPage()
+    surveyUi.loadCreateSurvey()
+    store.user = response.user
+  })
   $('form').trigger('reset')
-  $('#auth-status').text('Not signed up!')
 }
 
-const signInSuccess = data => {
-  store.user = data.user
+// const signInFailure = () => {
+//   $('#auth-status').text('Not signed in!')
+// }
+
+const changePasswordSuccess = response => {
+  const action = ['changePassword', 'danger', 'success']
+  handleResponse(response, action)
   $('form').trigger('reset')
-  $('#auth-status').text('Signed in!')
 }
 
-const signInFailure = () => {
-  $('#auth-status').text('Not signed in!')
+// const changePasswordFailure = () => {
+//   $('form').trigger('reset')
+//   $('#auth-status').text('Didnt change password!')
+// }
+
+const signOutSuccess = response => {
+  const action = ['signOut', 'danger', 'info']
+  handleResponse(response, action, () => {
+    store.user = null
+    const splashPageHtml = splashPageTemplate()
+    $('main').html(splashPageHtml)
+    const navbarHtml = emptyNavTemplate()
+    $('header').html(navbarHtml)
+  })
 }
 
-const changePasswordSuccess = data => {
-  $('form').trigger('reset')
-  $('#auth-status').text('Changed password!')
-}
-
-const changePasswordFailure = () => {
-  $('form').trigger('reset')
-  $('#auth-status').text('Didnt change password!')
-}
-
-const signOutSuccess = data => {
-  store.user = null
-  const splashPageHtml = splashPageTemplate()
-  $('main').html(splashPageHtml)
-  const navbarHtml = emptyNavTemplate()
-  $('header').html(navbarHtml)
-}
-
-const signOutFailure = () => {
-  $('#auth-status').text('Not signed out!')
-}
+// const signOutFailure = () => {
+//   $('#auth-status').text('Not signed out!')
+// }
 
 module.exports = {
   loadNavbar,
   loadSplashPage,
   loadMainPage,
   signUpSuccess,
-  signUpFailure,
   signInSuccess,
-  signInFailure,
   changePasswordSuccess,
-  changePasswordFailure,
-  signOutSuccess,
-  signOutFailure
+  signOutSuccess
 }
