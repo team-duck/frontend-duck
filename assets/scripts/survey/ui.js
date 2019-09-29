@@ -45,7 +45,7 @@ const loadRespondSurvey = data => {
 }
 
 // retrieves surveys
-const indexSurveySuccess = (data, type) => {
+const indexSurveyHandler = (data, type) => {
   const action = ['indexSurveys', 'danger', 'success']
   handleResponse(data, action, () => {
     store.surveys = data.surveys
@@ -63,7 +63,7 @@ const indexSurveySuccess = (data, type) => {
   })
 }
 
-const createSurveySuccess = data => {
+const createSurveyHandler = data => {
   const action = ['createSurvey', 'danger', 'success']
   handleResponse(data, action, () => {
     $('form').trigger('reset')
@@ -71,12 +71,12 @@ const createSurveySuccess = data => {
   })
 }
 
-const showSurveySuccess = data => {
+const showSurveyHandler = data => {
   const action = ['showSurvey', 'danger', 'success']
   handleResponse(data, action)
 }
 
-const updateSurveySuccess = data => {
+const updateSurveyHandler = data => {
   const action = ['updateSurvey', 'danger', 'success']
   handleResponse(data, action, () => {
     $('form').trigger('reset')
@@ -84,14 +84,17 @@ const updateSurveySuccess = data => {
   })
 }
 
-const deleteSurveySuccess = data => {
+const deleteSurveyHandler = data => {
   const action = ['deleteSurvey', 'danger', 'success']
   handleResponse(data, action)
 }
 
-const answerSurveySuccess = data => {
+const answerSurveyHandler = data => {
   const action = ['answerSurvey', 'danger', 'success']
-  handleResponse(data, action)
+  handleResponse(data, action, () => {
+    $('form').trigger('reset')
+    $('#respond-survey-modal').modal('toggle')
+  })
 }
 
 const showSurveyResults = data => {
@@ -105,12 +108,12 @@ module.exports = {
   loadCreateSurvey,
   loadUpdateSurvey,
   loadRespondSurvey,
-  indexSurveySuccess,
-  createSurveySuccess,
-  showSurveySuccess,
-  updateSurveySuccess,
-  deleteSurveySuccess,
-  answerSurveySuccess,
+  indexSurveyHandler,
+  createSurveyHandler,
+  showSurveyHandler,
+  updateSurveyHandler,
+  deleteSurveyHandler,
+  answerSurveyHandler,
   showSurveyResults,
   store
 }
