@@ -1,6 +1,7 @@
 'use strict'
 
 const store = require('./../store')
+const handleResponse = require('./../common/handleResponse')
 const createSurveyTemplate = require('./../templates/create-survey/create-survey-modal.handlebars')
 const updateSurveyTemplate = require('./../templates/create-survey/update-survey-modal.handlebars')
 const respondSurveyTemplate = require('./../templates/surveys-page/respond-survey-modal.handlebars')
@@ -31,16 +32,42 @@ const loadRespondSurvey = data => {
 
 // retrieves all surveys
 const indexSurveySuccess = data => {
-  const showSurveysHtml = showSurveysTemplate({ surveys: data.surveys })
-  $('#view').html(showSurveysHtml)
+  const action = ['indexSurveys', 'danger', 'success']
+  handleResponse(data, action, () => {
+    const showSurveysHtml = showSurveysTemplate({ surveys: data.surveys })
+    $('#view').html(showSurveysHtml)
+  })
 }
 
-const indexSurveyFailure = () => {
-  $('#survey-status').text('Surveys not retrieved!')
+const createSurveySuccess = data => {
+  const action = ['createSurvey', 'danger', 'success']
+  handleResponse(data, action, () => {
+    $('form').trigger('reset')
+    $('#create-survey-modal').modal('toggle')
+  })
 }
 
-const respondToSurvey = data => {
-  console.log('respondToSurvey', data) // here
+const showSurveySuccess = data => {
+  const action = ['showSurvey', 'danger', 'success']
+  handleResponse(data, action)
+}
+
+const updateSurveySuccess = data => {
+  const action = ['updateSurvey', 'danger', 'success']
+  handleResponse(data, action, () => {
+    $('form').trigger('reset')
+    $('#update-survey-modal').modal('toggle')
+  })
+}
+
+const deleteSurveySuccess = data => {
+  const action = ['deleteSurvey', 'danger', 'success']
+  handleResponse(data, action)
+}
+
+const answerSurveySuccess = data => {
+  const action = ['answerSurvey', 'danger', 'success']
+  handleResponse(data, action)
 }
 
 const showSurveyResults = data => {
@@ -49,35 +76,16 @@ const showSurveyResults = data => {
   $('#chartContainer').CanvasJSChart(options)
 }
 
-const showSurveyFailure = () => {
-  $('#survey-status').text('Survey not retrieved!')
-}
-
-const updateSurveyFailure = () => {
-  // $('#create-survey-modal').text('Survey not updated!')
-  console.log('survey not updated')
-}
-
-const createSurveySuccess = () => {
-  $('form').trigger('reset')
-  $('#create-survey-modal').modal('toggle')
-}
-
-const createSurveyFailure = () => {
-  $('#survey-status').text('Survey not created!')
-}
-
 module.exports = {
   loadCreateSurvey,
   loadUpdateSurvey,
   loadRespondSurvey,
   indexSurveySuccess,
-  indexSurveyFailure,
-  showSurveyFailure,
   createSurveySuccess,
-  createSurveyFailure,
+  showSurveySuccess,
+  updateSurveySuccess,
+  deleteSurveySuccess,
+  answerSurveySuccess,
   showSurveyResults,
-  updateSurveyFailure,
-  respondToSurvey,
   store
 }

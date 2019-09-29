@@ -28,15 +28,10 @@ const signUpSuccess = response => {
   $('form').trigger('reset')
 }
 
-// const signUpFailure = () => {
-//   $('form').trigger('reset')
-//   $('#auth-status').text('Not signed up!')
-// }
-
 const signInSuccess = response => {
   const action = ['signIn', 'danger', 'success']
   handleResponse(response, action, () => {
-    // should bring in the function sfrom on signedIn
+    // should bring in the function from on signedIn
     loadNavbar()
     loadMainPage()
     store.user = response.user
@@ -44,20 +39,11 @@ const signInSuccess = response => {
   $('form').trigger('reset')
 }
 
-// const signInFailure = () => {
-//   $('#auth-status').text('Not signed in!')
-// }
-
 const changePasswordSuccess = response => {
   const action = ['changePassword', 'danger', 'success']
   handleResponse(response, action)
   $('form').trigger('reset')
 }
-
-// const changePasswordFailure = () => {
-//   $('form').trigger('reset')
-//   $('#auth-status').text('Didnt change password!')
-// }
 
 const signOutSuccess = response => {
   const action = ['signOut', 'danger', 'info']
@@ -69,10 +55,6 @@ const signOutSuccess = response => {
     $('header').html(navbarHtml)
   })
 }
-
-// const signOutFailure = () => {
-//   $('#auth-status').text('Not signed out!')
-// }
 
 module.exports = {
   loadNavbar,

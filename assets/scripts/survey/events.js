@@ -15,7 +15,7 @@ const onIndexSurvey = event => {
 
   api.indexSurvey()
     .then(ui.indexSurveySuccess)
-    .catch(ui.indexSurveyFailure)
+    .catch(ui.indexSurveySuccess)
 }
 
 const onSocketIndex = message => {
@@ -30,7 +30,7 @@ const onSocketIndex = message => {
         store.surveys = data.surveys
       }
     })
-    .catch(ui.indexSurveyFailure)
+    .catch(ui.indexSurveySuccess)
 }
 
 const onCreateSurveyButton = event => {
@@ -47,7 +47,7 @@ const onCreateSurvey = event => {
 
   api.createSurvey(surveyPojo)
     .then(ui.createSurveySuccess)
-    .catch(ui.createSurveyFailure)
+    .catch(ui.createSurveySuccess)
 }
 
 // opens a modal for editing the survey
@@ -58,7 +58,7 @@ const onEditSurveyButton = event => {
 
   api.showSurvey(id)
     .then(ui.loadUpdateSurvey)
-    .catch(ui.updateSurveyFailure)
+    .catch(ui.showSurveySuccess)
 }
 
 // retrieve edited survey data from form and process into an object
@@ -73,8 +73,8 @@ const onUpdateSurvey = (event) => {
   const surveyPojo = processSurveyData(data)
 
   api.updateSurvey(id, surveyPojo)
-    .then(ui.loadUpdateSurvey) // change to toggle modal
-    .catch(ui.updateSurveyFailure)
+    .then(ui.updateSurveySuccess)
+    .catch(ui.updateSurveySuccess)
 }
 
 const onDeleteSurvey = event => {
@@ -84,7 +84,7 @@ const onDeleteSurvey = event => {
 
   api.deleteSurvey(id)
     .then(onIndexSurvey)
-    .catch(ui.indexSurveyFailure)
+    .catch(ui.deleteSurveySuccess)
 }
 
 // opens a modal for responding to survey
@@ -95,7 +95,7 @@ const onRespondSurveyButton = event => {
 
   api.showSurvey(id)
     .then(ui.loadRespondSurvey)
-    .catch(ui.showSurveyFailure)
+    .catch(ui.showSurveySuccess)
 }
 
 // retrieve answer from form and process into an object
@@ -119,8 +119,8 @@ const onAnswerSurvey = event => {
   }
 
   api.answerSurvey(surveyId, responsePojo)
-    .then(console.log)
-    .catch(console.error)
+    .then(ui.answerSurveySuccess)
+    .catch(ui.answerSurveySuccess)
 }
 
 // displays survey results chart
@@ -131,7 +131,7 @@ const onViewResults = event => {
 
   api.showSurvey(id)
     .then(ui.showSurveyResults)
-    .catch(ui.showSurveyFailure)
+    .catch(ui.showSurveySuccess)
 }
 
 const addHandlers = () => {
