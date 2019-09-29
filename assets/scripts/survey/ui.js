@@ -1,17 +1,32 @@
 'use strict'
 
 const store = require('./../store')
-const createSurveyTemplate = require('./../templates/create-survey/create-survey-form.handlebars')
+const createSurveyTemplate = require('./../templates/create-survey/create-survey-modal.handlebars')
+const updateSurveyTemplate = require('./../templates/create-survey/update-survey-modal.handlebars')
+const respondSurveyTemplate = require('./../templates/surveys-page/respond-survey-modal.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
-const updateSurveyTemplate = require('./../templates/create-survey/update-survey-form.handlebars')
-const respondSurveyTemplate = require('./../templates/surveys-page/survey-modal.handlebars')
 const chartData = require('./../../../lib/chart')
 const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
 
-// loads the modal for creating surveys
+// loads the modal for creating survey
 const loadCreateSurvey = () => {
   const createSurveyHtml = createSurveyTemplate()
-  $('.custom-modal-forms').html(createSurveyHtml)
+  $('.modal-container').html(createSurveyHtml)
+  $('#create-survey-modal').modal('toggle')
+}
+
+// loads the modal for updating survey
+const loadUpdateSurvey = data => {
+  const updateSurveyHtml = updateSurveyTemplate({survey: data.survey})
+  $('.modal-container').html(updateSurveyHtml)
+  $('#update-survey-modal').modal('toggle')
+}
+
+// loads the modal for answering survey
+const loadRespondSurvey = data => {
+  const respondSurveyHtml = respondSurveyTemplate(data)
+  $('.modal-container').html(respondSurveyHtml)
+  $('#respond-survey-modal').modal('toggle')
 }
 
 // retrieves all surveys
@@ -22,13 +37,6 @@ const indexSurveySuccess = data => {
 
 const indexSurveyFailure = () => {
   $('#survey-status').text('Surveys not retrieved!')
-}
-
-// opens modal for answering survey
-const loadRespondSurvey = data => {
-  const respondSurveyHtml = respondSurveyTemplate(data)
-  $('.modal-container').html(respondSurveyHtml)
-  $('#respond-survey-modal').modal('toggle')
 }
 
 const respondToSurvey = data => {
@@ -45,16 +53,11 @@ const showSurveyFailure = () => {
   $('#survey-status').text('Survey not retrieved!')
 }
 
-const updateSurveyModal = (data) => {
-
-  const updateSurveyHtml = updateSurveyTemplate({survey: data.survey})
-  $('.custom-modal-forms').html(updateSurveyHtml)
-  $('#create-survey-modal').modal('toggle')
-}
 const updateSurveyFailure = () => {
   // $('#create-survey-modal').text('Survey not updated!')
   console.log('survey not updated')
 }
+
 const createSurveySuccess = () => {
   $('form').trigger('reset')
   $('#create-survey-modal').modal('toggle')
@@ -66,14 +69,14 @@ const createSurveyFailure = () => {
 
 module.exports = {
   loadCreateSurvey,
+  loadUpdateSurvey,
+  loadRespondSurvey,
   indexSurveySuccess,
   indexSurveyFailure,
-  loadRespondSurvey,
   showSurveyFailure,
   createSurveySuccess,
   createSurveyFailure,
   showSurveyResults,
-  updateSurveyModal,
   updateSurveyFailure,
   respondToSurvey,
   store

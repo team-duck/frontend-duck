@@ -1,7 +1,6 @@
 'use strict'
 
 const store = require('./../store')
-const surveyUi = require('./../survey/ui.js')
 const handleResponse = require('./../common/handleResponse')
 const navbarTemplate = require('./../templates/nav-bar-content.handlebars')
 const splashPageTemplate = require('./../templates/splash-page/splash-body.handlebars')
@@ -21,7 +20,6 @@ const loadSplashPage = () => {
 const loadMainPage = () => {
   const mainPageHtml = mainPageTemplate()
   $('main').html(mainPageHtml)
-  surveyUi.loadCreateSurvey()
 }
 
 const signUpSuccess = response => {
@@ -41,7 +39,6 @@ const signInSuccess = response => {
     // should bring in the function sfrom on signedIn
     loadNavbar()
     loadMainPage()
-    surveyUi.loadCreateSurvey()
     store.user = response.user
   })
   $('form').trigger('reset')
