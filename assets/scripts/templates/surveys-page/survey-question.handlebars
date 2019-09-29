@@ -1,5 +1,5 @@
 <h5 class="card-title">{{question.text}}</h5>
-<input type="hidden" name="question{{@index}}[id]" value="{{question._id}}">
+<input type="hidden" name="question{{incremented @index}}[id]" value="{{question._id}}">
 {{#each question.responses as |response|}}
-  {{> question-response response=response }}
+  {{> question-response response=response questionIndex=@../index }}
 {{/each}}

@@ -1,0 +1,26 @@
+<!-- BOOTSTRAP MODALS TRANSFER  -->
+<div class="modal fade" id="update-survey-modal" tabindex="-1" role="dialog" aria-labelledby="update-survey-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="update-survey-label">Update Survey</h5>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="update-survey">
+          <div class="form-group">
+            <label for="survey-title">Survey Title</label>
+            <input type="hidden" name="survey[id]" value="{{survey._id}}">
+            <input type="text" class="form-control" id="survey-title" name="survey[title]" value="{{survey.title}}">
+          </div>
+          {{#each survey.questions as |question| }}
+            {{> update-question surveyId=survey._id question=question }}
+          {{/each}}
+          <button type="submit" class="btn btn-primary">Update Survey</button>
+          <button type="submit" class="btn btn-primary">Add another question</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

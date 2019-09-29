@@ -21,6 +21,7 @@ const showSurvey = id => {
     }
   })
 }
+
 const deleteSurvey = id => {
   return $.ajax({
     url: config.apiUrl + '/surveys/' + id,

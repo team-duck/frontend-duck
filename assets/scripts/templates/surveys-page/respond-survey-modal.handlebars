@@ -17,7 +17,7 @@
               <form id="survey-form">
                 <input type="hidden" name="survey[id]" value="{{survey._id}}">
                 {{#each survey.questions as |question| }}
-                  {{> survey-question question=question }}
+                  {{> survey-question surveyId=survey._id question=question }}
                 {{/each}}
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
