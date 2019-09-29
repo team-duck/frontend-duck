@@ -47,7 +47,7 @@ const onChangePassword = event => {
 
 const onSignOut = event => {
   event.preventDefault()
-
+  $('#chartContainer').hide()
   api.signOut()
     .then(authUi.signOutSuccess)
     .catch(authUi.signOutSuccess)
