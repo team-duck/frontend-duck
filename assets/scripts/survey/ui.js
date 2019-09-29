@@ -7,6 +7,7 @@ const updateSurveyTemplate = require('./../templates/create-survey/update-survey
 const respondSurveyTemplate = require('./../templates/surveys-page/respond-survey-modal.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
 const showMySurveysTemplate = require('./../templates/surveys-page/my-surveys-page.handlebars')
+const showResultsTemplate = require('./../templates/surveys-page/results-page.handlebars')
 const chartData = require('./../../../lib/chart')
 const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
 
@@ -78,7 +79,8 @@ const answerSurveySuccess = data => {
 
 const showSurveyResults = data => {
   const options = chartData(data.survey)[0]
-
+  const showResultsHtml = showResultsTemplate({survey: data.survey})
+  $('#view').html(showResultsHtml)
   $('#chartContainer').CanvasJSChart(options)
 }
 
