@@ -32,8 +32,8 @@ const signInSuccess = response => {
   const action = ['signIn', 'danger', 'success']
   handleResponse(response, action, () => {
     // should bring in the function from on signedIn
-    loadNavbar()
-    loadMainPage()
+    // loadNavbar()
+    // loadMainPage()
     store.user = response.user
   })
   $('form').trigger('reset')

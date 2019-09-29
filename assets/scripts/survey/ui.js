@@ -2,14 +2,26 @@
 
 const store = require('./../store')
 const handleResponse = require('./../common/handleResponse')
+const navbarTemplate = require('./../templates/nav-bar-content.handlebars')
+const mainPageTemplate = require('./../templates/main-page/main-body.handlebars')
 const createSurveyTemplate = require('./../templates/create-survey/create-survey-modal.handlebars')
 const updateSurveyTemplate = require('./../templates/create-survey/update-survey-modal.handlebars')
 const respondSurveyTemplate = require('./../templates/surveys-page/respond-survey-modal.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
 const showMySurveysTemplate = require('./../templates/surveys-page/my-surveys-page.handlebars')
 const showResultsTemplate = require('./../templates/surveys-page/results-page.handlebars')
+
 const chartData = require('./../../../lib/chart')
 const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
+
+const loadNavbar = () => {
+  const navbarHtml = navbarTemplate()
+  $('header').html(navbarHtml)
+}
+const loadMainPage = (surveys) => {
+  const mainPageHtml = mainPageTemplate({surveys: surveys})
+  $('main').html(mainPageHtml)
+}
 
 // loads the modal for creating survey
 const loadCreateSurvey = () => {
@@ -36,13 +48,18 @@ const loadRespondSurvey = data => {
 const indexSurveySuccess = (data, type) => {
   const action = ['indexSurveys', 'danger', 'success']
   handleResponse(data, action, () => {
+    store.surveys = data.surveys
     let showSurveysHtml
     if (type === 'all') {
       showSurveysHtml = showSurveysTemplate({ surveys: data.surveys })
+      $('#view').html(showSurveysHtml)
     } else if (type === 'my') {
       showSurveysHtml = showMySurveysTemplate({ surveys: data.surveys })
+      $('#view').html(showSurveysHtml)
+    } else if (type === 'signIn') {
+      loadNavbar()
+      loadMainPage(store.surveys)
     }
-    $('#view').html(showSurveysHtml)
   })
 }
 
