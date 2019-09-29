@@ -8,7 +8,9 @@
 
         <p>{{question.title}}</p>
       {{/each}}
-      <a href="#" class="btn btn-primary respond-btn" data-id="{{survey._id}}">Respond</a>
+      {{#if (hasAnswered survey._id) }}
+        {{> respond-btn survey = survey}}
+      {{/if}}
       <a href="#" class="btn btn-primary results-btn" data-id="{{survey._id}}">Results</a>
       {{#if (ownership survey.owner) }}
         {{> delete survey = survey}}
