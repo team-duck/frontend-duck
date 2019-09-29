@@ -46,7 +46,7 @@ const loadRespondSurvey = data => {
 
 // retrieves surveys
 const indexSurveyHandler = (data, type) => {
-  const action = ['indexSurveys', 'danger', 'success']
+  const action = ['indexSurveys', 'danger', 'no-alert']
   handleResponse(data, action, () => {
     store.surveys = data.surveys
     let showSurveysHtml
