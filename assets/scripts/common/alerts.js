@@ -9,6 +9,9 @@ const showAlert = (message, type) => {
   // An HTML template that will be used for each
   // alert.  Classes from Animate.css will make it
   // slide in from the left with a bounce at the end.
+  if (type === 'no-alert') {
+    return // this if statement allows you suppress the creation of an alert if you want
+  }
   const alertTemplate = `
   <div class="alert-${type} alert alert-dismissible fade show animated bounceInLeft" role="alert">
     ${message}

@@ -20,8 +20,8 @@
                   {{> survey-question surveyId=survey._id question=question }}
                 {{/each}}
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary results-btn" data-id="{{survey._id}}">Results</button>
               </form>
-              <a href="#" class="btn btn-primary">Results</a>
             </div>
           </div>
         </div>

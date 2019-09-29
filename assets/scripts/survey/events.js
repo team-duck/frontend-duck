@@ -14,8 +14,8 @@ const onIndexSurvey = (event, type) => {
   }
 
   api.indexSurvey()
-    .then(response => ui.indexSurveySuccess(response, type))
-    .catch(ui.indexSurveySuccess)
+    .then(response => ui.indexSurveyHandler(response, type))
+    .catch(ui.indexSurveyHandler)
 }
 
 const onSocketIndex = message => {
@@ -25,12 +25,12 @@ const onSocketIndex = message => {
   api.indexSurvey()
     .then(data => {
       if (indexView) {
-        ui.indexSurveySuccess(data)
+        ui.indexSurveyHandler(data)
       } else {
         store.surveys = data.surveys
       }
     })
-    .catch(ui.indexSurveySuccess)
+    .catch(ui.indexSurveyHandler)
 }
 
 const onCreateSurveyButton = event => {
@@ -46,8 +46,8 @@ const onCreateSurvey = event => {
   const surveyPojo = processSurveyData(data)
 
   api.createSurvey(surveyPojo)
-    .then(ui.createSurveySuccess)
-    .catch(ui.createSurveySuccess)
+    .then(ui.createSurveyHandler)
+    .catch(ui.createSurveyHandler)
 }
 
 // opens a modal for editing the survey
@@ -58,7 +58,7 @@ const onEditSurveyButton = event => {
 
   api.showSurvey(id)
     .then(ui.loadUpdateSurvey)
-    .catch(ui.showSurveySuccess)
+    .catch(ui.showSurveyHandler)
 }
 
 // retrieve edited survey data from form and process into an object
@@ -73,8 +73,8 @@ const onUpdateSurvey = (event) => {
   const surveyPojo = processSurveyData(data)
 
   api.updateSurvey(id, surveyPojo)
-    .then(ui.updateSurveySuccess)
-    .catch(ui.updateSurveySuccess)
+    .then(ui.updateSurveyHandler)
+    .catch(ui.updateSurveyHandler)
 }
 
 const onDeleteSurvey = event => {
@@ -84,7 +84,7 @@ const onDeleteSurvey = event => {
 
   api.deleteSurvey(id)
     .then(onIndexSurvey)
-    .catch(ui.deleteSurveySuccess)
+    .catch(ui.deleteSurveyHandler)
 }
 
 // opens a modal for responding to survey
@@ -95,7 +95,7 @@ const onRespondSurveyButton = event => {
 
   api.showSurvey(id)
     .then(ui.loadRespondSurvey)
-    .catch(ui.showSurveySuccess)
+    .catch(ui.showSurveyHandler)
 }
 
 // retrieve answer from form and process into an object
@@ -119,8 +119,8 @@ const onAnswerSurvey = event => {
   }
 
   api.answerSurvey(surveyId, responsePojo)
-    .then(ui.answerSurveySuccess)
-    .catch(ui.answerSurveySuccess)
+    .then(ui.answerSurveyHandler)
+    .catch(ui.answerSurveyHandler)
 }
 
 // displays survey results chart
@@ -131,7 +131,7 @@ const onViewResults = event => {
 
   api.showSurvey(id)
     .then(ui.showSurveyResults)
-    .catch(ui.showSurveySuccess)
+    .catch(ui.showSurveyHandler)
 }
 
 const addHandlers = () => {
