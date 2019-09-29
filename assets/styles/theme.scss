@@ -1,0 +1,166 @@
+// main {
+//   @include make-container;
+//   @include make-container-max-widths;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   min-height: 100vh;
+//   section {
+//     @include make-col-ready;
+//     @include media-breakpoint-up(md) {
+//       @include make-col(6);
+//     }
+//     @include media-breakpoint-up(lg) {
+//       @include make-col(4);
+//     }
+//     background: $white;
+//     border: 1px solid;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     margin: .1rem;
+//     outline: none;
+//     padding: 1rem;
+//
+//     p {
+//       margin-bottom: 0;
+//       overflow-wrap: break-word;
+//     }
+//
+//   }
+//
+//   .resume-clips {
+//     @include make-row;
+//
+//     &:empty {
+//       &::before {
+//         color: lighten($info, 25%);
+//         // content: 'Click Get Clips';
+//         font-size: 10vh;
+//         line-height: .85;
+//         text-align: center;
+//         width: 100%;
+//       }
+//     }
+//   }
+// }
+// #newClip {
+//   position: fixed;
+//   right: 1.5rem;
+//   bottom: 0.5rem;
+//   width: 4rem;
+//   height: 4rem;
+//   border-radius: 4rem;
+//   overflow: visible;
+//   border: none;
+//   cursor: pointer;
+//   transition: all 200ms cubic-bezier(0.68, -0.55, 0.265, 2.55);
+//   background-position: center center;
+//   background-repeat: no-repeat;
+//   background-size: 1.9rem 1.9rem;
+//   z-index: 210;
+//   }
+// taken from Alerts project
+// body {
+//   background: linear-gradient(to bottom right, midnightblue, $black);
+//   overflow-wrap: break-word;
+//   // display: flex;
+//   // flex-direction: column;
+//   // justify-content: center;
+//   // min-height: 100vh;
+// }
+
+button {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.new-option-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 2.5rem;
+}
+// div.sign-in-form {
+//   form {
+//     @include media-breakpoint-up(sm) {
+//       @include make-col(8);
+//     }
+//     @include media-breakpoint-up(md) {
+//       @include make-col(8);
+//     }
+//     @include media-breakpoint-up(lg) {
+//       @include make-col(6);
+//     }
+//
+//     background-color: $white;
+//     border: 1px solid $gray-200;
+//     border-radius: $border-radius;
+//     box-shadow: 3px 3px 0 transparentize($gray-900, .75);
+//     display: flex;
+//     flex-direction: column;
+//     margin: 1rem auto;
+//     padding: 2rem 1.5rem;
+//
+//     button {
+//       align-self: flex-end;
+//     }
+//
+//     footer {
+//       background-color: $gray-100;
+//       margin: 1rem -1.5rem -2rem;
+//       padding: 1rem;
+//
+//       p {
+//         margin: 0;
+//       }
+//     }
+//   }
+// }
+
+
+input {
+  margin-bottom: .75rem;
+
+  &:not([type="submit"]) {
+    @extend .form-control
+  }
+}
+
+.after-sign-in {
+  display: none;
+}
+
+// .hide {
+//   display: none !important;
+// }
+
+.message-container {
+  @include media-breakpoint-up(sm) {
+    @include make-col(8);
+  }
+  @include media-breakpoint-up(md) {
+    @include make-col(6);
+  }
+  @include media-breakpoint-up(lg) {
+    @include make-col(4);
+  }
+
+  bottom: 1rem;
+  left: 1rem;
+  margin: auto;
+  position: fixed;
+  right: 1rem;
+}
+
+
+nav {
+  @extend .navbar;
+  @extend .navbar-dark;
+  @extend .bg-dark;
+  @extend .fixed-top;
+
+  .app-name {
+    @extend .navbar-brand;
+    @extend .h1;
+    margin-bottom: 0;
+  }
+}

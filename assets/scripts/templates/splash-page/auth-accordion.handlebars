@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+  <div class="col-6">
+    <div class="accordion" id="auth-accordion">
+      <div class="card">
+        <div class="card-header" id="sign-up-card">
+          <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#sign-up-collapse" aria-expanded="true" aria-controls="sign-up-collapse">
+              Sign Up
+            </button>
+          </h2>
+        </div>
+
+        <div id="sign-up-collapse" class="collapse show" aria-labelledby="sign-up-card" data-parent="#auth-accordion">
+          <div class="card-body">
+            {{> sign-up-form }}
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="sign-in-card">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#sign-in-collapse" aria-expanded="false" aria-controls="sign-in-collapse">
+              Sign In
+            </button>
+          </h2>
+        </div>
+        <div id="sign-in-collapse" class="collapse" aria-labelledby="sign-in-card" data-parent="#auth-accordion">
+          <div class="card-body">
+            {{> sign-in-form }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

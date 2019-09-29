@@ -1,0 +1,7 @@
+<div class="container" id="survey-container">
+  <div class="row" id="survey-row">
+    {{#each surveys as |survey|}}
+      {{> survey-preview survey = survey}}
+    {{/each}}
+  </div>
+</div>

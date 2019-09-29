@@ -2,18 +2,11 @@
 
 const api = require('./api')
 const getFormFields = require('./../../../lib/get-form-fields')
-const authUi = require('./ui')
-const surveyUi = require('./../survey/ui')
+const ui = require('./ui')
+const surveyEvents = require('./../survey/events')
 
 const onLoad = () => {
-  authUi.loadSignUp()
-  authUi.loadSignIn()
-}
-
-const onSignedIn = () => {
-  authUi.loadUserControls()
-  surveyUi.loadCreateSurvey()
-  surveyUi.loadSurveyControls()
+  ui.loadSplashPage()
 }
 
 const onSignUp = event => {
@@ -22,8 +15,8 @@ const onSignUp = event => {
   const data = getFormFields(event.target)
 
   api.signUp(data)
-    .then(authUi.signUpSuccess)
-    .catch(authUi.signUpFailure)
+    .then(ui.signUpSuccess)
+    .catch(ui.signUpSuccess)
 }
 
 const onSignIn = event => {
@@ -32,9 +25,11 @@ const onSignIn = event => {
   const data = getFormFields(event.target)
 
   api.signIn(data)
-    .then(authUi.signInSuccess)
-    .then(() => onSignedIn())
-    .catch(authUi.signInFailure)
+    .then(ui.signInSuccess)
+    .then(() => {
+      surveyEvents.onIndexSurvey(null, 'signIn')
+    })
+    .catch(ui.signInSuccess)
 }
 
 const onChangePassword = event => {
@@ -43,28 +38,28 @@ const onChangePassword = event => {
   const data = getFormFields(event.target)
 
   api.changePassword(data)
-    .then(authUi.changePasswordSuccess)
-    .catch(authUi.changePasswordFailure)
+    .then(ui.changePasswordSuccess)
+    .catch(ui.changePasswordSuccess)
 }
 
 const onSignOut = event => {
   event.preventDefault()
-
+  $('#chartContainer').hide()
   api.signOut()
-    .then(authUi.signOutSuccess)
-    .catch(authUi.signOutFailure)
+    .then(ui.signOutSuccess)
+    .catch(ui.signOutSuccess)
 }
 
 const addHandlers = () => {
-  $('#sign-up').on('submit', onSignUp)
-  $('#sign-in').on('submit', onSignIn)
-  $('#change-password').on('submit', onChangePassword)
-  $('#signout-button').on('click', onSignOut)
+  $('main').on('submit', '#sign-up', onSignUp)
+  $('main').on('submit', '#sign-in', onSignIn)
+  $('header').on('submit', '#change-password', onChangePassword)
+  $('header').on('click', '#signout-button', onSignOut)
+  $('header').on('click', '#home-link', ui.loadMainPage)
 }
 
 module.exports = {
   onLoad,
-  onSignedIn,
   onSignUp,
   onSignIn,
   onChangePassword,

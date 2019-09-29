@@ -7,8 +7,11 @@
     "content": "CC­BY­NC­SA 4.0"
   },
   "dependencies": {
+    "animate.css": "^3.7.2",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.1.2",
+    "canvas": "^2.6.0",
+    "canvasjs": "^1.8.1",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.3",
     "socket.io-client": "^2.3.0"

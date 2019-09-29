@@ -1,53 +1,119 @@
 'use strict'
 
 const store = require('./../store')
-const createSurveyTemplate = require('./../templates/create-survey-form.handlebars')
-const surveyControlsTemplate = require('./../templates/survey-controls.handlebars')
+const handleResponse = require('./../common/handleResponse')
+const navbarTemplate = require('./../templates/nav-bar-content.handlebars')
+const mainPageTemplate = require('./../templates/main-page/main-body.handlebars')
+const createSurveyTemplate = require('./../templates/create-survey/create-survey-modal.handlebars')
+const updateSurveyTemplate = require('./../templates/create-survey/update-survey-modal.handlebars')
+const respondSurveyTemplate = require('./../templates/surveys-page/respond-survey-modal.handlebars')
+const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
+const showMySurveysTemplate = require('./../templates/surveys-page/my-surveys-page.handlebars')
+const showResultsTemplate = require('./../templates/surveys-page/results-page.handlebars')
 
+const chartData = require('./../../../lib/chart')
+const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
+
+const loadNavbar = () => {
+  const navbarHtml = navbarTemplate()
+  $('header').html(navbarHtml)
+}
+const loadMainPage = (surveys) => {
+  const mainPageHtml = mainPageTemplate({surveys: surveys})
+  $('main').html(mainPageHtml)
+}
+
+// loads the modal for creating survey
 const loadCreateSurvey = () => {
-  const userControlsHtml = createSurveyTemplate()
-  $('main').append(userControlsHtml)
+  const createSurveyHtml = createSurveyTemplate()
+  $('.modal-container').html(createSurveyHtml)
+  $('#create-survey-modal').modal('toggle')
 }
 
-const loadSurveyControls = () => {
-  const surveyControlsHtml = surveyControlsTemplate()
-  $('main').append(surveyControlsHtml)
+// loads the modal for updating survey
+const loadUpdateSurvey = data => {
+  const updateSurveyHtml = updateSurveyTemplate({survey: data.survey})
+  $('.modal-container').html(updateSurveyHtml)
+  $('#update-survey-modal').modal('toggle')
 }
 
-const indexSurveySuccess = data => {
-  console.log(data)
-  for (let i = 0; i < data.surveys.length; i++) {
-    $('#survey-status').append(`<p>${JSON.stringify(data.surveys[i])}</p>`)
-  }
+// loads the modal for answering survey
+const loadRespondSurvey = data => {
+  const respondSurveyHtml = respondSurveyTemplate(data)
+  $('.modal-container').html(respondSurveyHtml)
+  $('#respond-survey-modal').modal('toggle')
 }
 
-const indexSurveyFailure = () => {
-  $('#survey-status').text('Surveys not retrieved!')
+// retrieves surveys
+const indexSurveyHandler = (data, type) => {
+  const action = ['indexSurveys', 'danger', 'no-alert']
+  handleResponse(data, action, () => {
+    store.surveys = data.surveys
+    let showSurveysHtml
+    if (type === 'all') {
+      showSurveysHtml = showSurveysTemplate({ surveys: data.surveys })
+      $('#view').html(showSurveysHtml)
+    } else if (type === 'my') {
+      showSurveysHtml = showMySurveysTemplate({ surveys: data.surveys })
+      $('#view').html(showSurveysHtml)
+    } else if (type === 'signIn') {
+      loadNavbar()
+      loadMainPage(store.surveys)
+    }
+  })
 }
 
-const showSurveySuccess = data => {
-  $('#survey-status').append(`<p>${JSON.stringify(data)}</p>`)
+const createSurveyHandler = data => {
+  const action = ['createSurvey', 'danger', 'success']
+  handleResponse(data, action, () => {
+    $('form').trigger('reset')
+    $('#create-survey-modal').modal('toggle')
+  })
 }
 
-const showSurveyFailure = () => {
-  $('#survey-status').text('Survey not retrieved!')
+const showSurveyHandler = data => {
+  const action = ['showSurvey', 'danger', 'success']
+  handleResponse(data, action)
 }
 
-const createSurveySuccess = () => {
-  $('#survey-status').text('Survey created!')
+const updateSurveyHandler = data => {
+  const action = ['updateSurvey', 'danger', 'success']
+  handleResponse(data, action, () => {
+    $('form').trigger('reset')
+    $('#update-survey-modal').modal('toggle')
+  })
 }
 
-const createSurveyFailure = () => {
-  $('#survey-status').text('Survey not created!')
+const deleteSurveyHandler = data => {
+  const action = ['deleteSurvey', 'danger', 'success']
+  handleResponse(data, action)
+}
+
+const answerSurveyHandler = data => {
+  const action = ['answerSurvey', 'danger', 'success']
+  handleResponse(data, action, () => {
+    $('form').trigger('reset')
+    $('#respond-survey-modal').modal('toggle')
+  })
+}
+
+const showSurveyResults = data => {
+  const options = chartData(data.survey)[0]
+  const showResultsHtml = showResultsTemplate({survey: data.survey})
+  $('#view').html(showResultsHtml)
+  $('#chartContainer').CanvasJSChart(options)
 }
 
 module.exports = {
   loadCreateSurvey,
-  loadSurveyControls,
-  indexSurveySuccess,
-  indexSurveyFailure,
-  showSurveySuccess,
-  showSurveyFailure,
-  createSurveySuccess,
-  createSurveyFailure
+  loadUpdateSurvey,
+  loadRespondSurvey,
+  indexSurveyHandler,
+  createSurveyHandler,
+  showSurveyHandler,
+  updateSurveyHandler,
+  deleteSurveyHandler,
+  answerSurveyHandler,
+  showSurveyResults,
+  store
 }

@@ -15,6 +15,17 @@ const indexSurvey = () => {
 const showSurvey = id => {
   return $.ajax({
     url: config.apiUrl + '/surveys/' + id,
+    method: 'GET',
+    headers: {
+      Authorization: 'bearer ' + store.user.token
+    }
+  })
+}
+
+const deleteSurvey = id => {
+  return $.ajax({
+    url: config.apiUrl + '/surveys/' + id,
+    method: 'DELETE',
     headers: {
       Authorization: 'bearer ' + store.user.token
     }
@@ -32,8 +43,33 @@ const createSurvey = data => {
   })
 }
 
+const updateSurvey = (id, data) => {
+  return $.ajax({
+    url: config.apiUrl + '/surveys/' + id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'bearer ' + store.user.token
+    },
+    data
+  })
+}
+
+const answerSurvey = (surveyId, response) => {
+  return $.ajax({
+    url: config.apiUrl + '/response/' + surveyId,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'bearer ' + store.user.token
+    },
+    data: response
+  })
+}
+
 module.exports = {
   indexSurvey,
   showSurvey,
-  createSurvey
+  createSurvey,
+  answerSurvey,
+  updateSurvey,
+  deleteSurvey
 }
