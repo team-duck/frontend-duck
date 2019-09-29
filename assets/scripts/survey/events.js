@@ -8,13 +8,13 @@ const socket = require('socket.io-client')(apiUrl)
 const store = require('../store')
 const processSurveyData = require('./../../../lib/process-survey-data')
 
-const onIndexSurvey = event => {
+const onIndexSurvey = (event, type) => {
   if (event) {
     event.preventDefault()
   }
 
   api.indexSurvey()
-    .then(ui.indexSurveySuccess)
+    .then(response => ui.indexSurveySuccess(response, type))
     .catch(ui.indexSurveySuccess)
 }
 
@@ -135,7 +135,8 @@ const onViewResults = event => {
 }
 
 const addHandlers = () => {
-  $('header').on('click', '#all-surveys-link', onIndexSurvey)
+  $('header').on('click', '#all-surveys-link', event => onIndexSurvey(event, 'all'))
+  $('header').on('click', '#my-surveys-link', event => onIndexSurvey(event, 'my'))
   $('main').on('submit', '#create-survey', onCreateSurvey)
   $('main').on('submit', '#update-survey', onUpdateSurvey)
   $('main').on('submit', '#survey-form', onAnswerSurvey)

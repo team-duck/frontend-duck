@@ -6,6 +6,7 @@ const createSurveyTemplate = require('./../templates/create-survey/create-survey
 const updateSurveyTemplate = require('./../templates/create-survey/update-survey-modal.handlebars')
 const respondSurveyTemplate = require('./../templates/surveys-page/respond-survey-modal.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
+const showMySurveysTemplate = require('./../templates/surveys-page/my-surveys-page.handlebars')
 const chartData = require('./../../../lib/chart')
 const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
 
@@ -30,11 +31,16 @@ const loadRespondSurvey = data => {
   $('#respond-survey-modal').modal('toggle')
 }
 
-// retrieves all surveys
-const indexSurveySuccess = data => {
+// retrieves surveys
+const indexSurveySuccess = (data, type) => {
   const action = ['indexSurveys', 'danger', 'success']
   handleResponse(data, action, () => {
-    const showSurveysHtml = showSurveysTemplate({ surveys: data.surveys })
+    let showSurveysHtml
+    if (type === 'all') {
+      showSurveysHtml = showSurveysTemplate({ surveys: data.surveys })
+    } else if (type === 'my') {
+      showSurveysHtml = showMySurveysTemplate({ surveys: data.surveys })
+    }
     $('#view').html(showSurveysHtml)
   })
 }
