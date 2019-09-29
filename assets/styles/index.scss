@@ -1,3 +1,23 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~animate.css/animate.css';
 @import 'theme';
+
+.respond-btn {
+  margin: 13px 12px 12px 10px;
+}
+
+.delete-btn {
+  margin: 13px 12px 12px 10px;
+  display: block;
+  text-align: center;
+}
+
+.edit-btn {
+  display: block;
+  text-align: center;
+}
+
+.results-btn {
+  display: block;
+  text-align: center;
+}
