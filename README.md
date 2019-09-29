@@ -99,15 +99,14 @@ Express (Created 4RESTful routes for handling (GET, POST,PUT,PATCH and DELETE) r
 
 ### Database
 MongoDb
-Mongoose  
+Mongoose
 
 ## Links!
 
 [Visit our back-end repo!](https://github.com/team-duck/backend-duck)
 
-[Backend url](https://still-scrubland-32932.herokuapp.com/)
+[Back-end url](https://still-scrubland-32932.herokuapp.com/)
 
-here goes front end url
-
+[Front-end url](https://team-duck.github.io/frontend-duck/)
 ## Unsolved problems
 Create more than 4 questions
