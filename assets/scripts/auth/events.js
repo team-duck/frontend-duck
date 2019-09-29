@@ -2,18 +2,11 @@
 
 const api = require('./api')
 const getFormFields = require('./../../../lib/get-form-fields')
-const authUi = require('./ui')
-// const surveyUi = require('./../survey/ui')
+const ui = require('./ui')
 
 const onLoad = () => {
-  authUi.loadSplashPage()
+  ui.loadSplashPage()
 }
-
-// const onSignedIn = () => {
-//   authUi.loadNavbar()
-//   authUi.loadMainPage()
-//   surveyUi.loadCreateSurvey()
-// }
 
 const onSignUp = event => {
   event.preventDefault()
@@ -21,8 +14,8 @@ const onSignUp = event => {
   const data = getFormFields(event.target)
 
   api.signUp(data)
-    .then(authUi.signUpSuccess)
-    .catch(authUi.signUpSuccess)
+    .then(ui.signUpSuccess)
+    .catch(ui.signUpSuccess)
 }
 
 const onSignIn = event => {
@@ -31,8 +24,8 @@ const onSignIn = event => {
   const data = getFormFields(event.target)
 
   api.signIn(data)
-    .then(authUi.signInSuccess)
-    .catch(authUi.signInSuccess)
+    .then(ui.signInSuccess)
+    .catch(ui.signInSuccess)
 }
 
 const onChangePassword = event => {
@@ -41,16 +34,16 @@ const onChangePassword = event => {
   const data = getFormFields(event.target)
 
   api.changePassword(data)
-    .then(authUi.changePasswordSuccess)
-    .catch(authUi.changePasswordSuccess)
+    .then(ui.changePasswordSuccess)
+    .catch(ui.changePasswordSuccess)
 }
 
 const onSignOut = event => {
   event.preventDefault()
   $('#chartContainer').hide()
   api.signOut()
-    .then(authUi.signOutSuccess)
-    .catch(authUi.signOutSuccess)
+    .then(ui.signOutSuccess)
+    .catch(ui.signOutSuccess)
 }
 
 const addHandlers = () => {
@@ -58,7 +51,7 @@ const addHandlers = () => {
   $('main').on('submit', '#sign-in', onSignIn)
   $('header').on('submit', '#change-password', onChangePassword)
   $('header').on('click', '#signout-button', onSignOut)
-  $('header').on('click', '#home-link', authUi.loadMainPage)
+  $('header').on('click', '#home-link', ui.loadMainPage)
 }
 
 module.exports = {

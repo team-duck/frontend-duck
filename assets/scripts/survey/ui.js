@@ -4,7 +4,7 @@ const store = require('./../store')
 const createSurveyTemplate = require('./../templates/create-survey/create-survey-form.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
 const updateSurveyTemplate = require('./../templates/create-survey/update-survey-form.handlebars')
-const respondSurveyTemplate = require('./../templates/surveys-page/survey-card.handlebars')
+const respondSurveyTemplate = require('./../templates/surveys-page/survey-modal.handlebars')
 const chartData = require('./../../../lib/chart')
 const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
 
@@ -41,25 +41,6 @@ const showSurveyResults = data => {
   $('#chartContainer').CanvasJSChart(options)
 }
 
-// const viewSurveySuccess = data => {
-//   const options = {
-//     animationEnabled: true,
-//     title: {
-//       text: 'test'
-//     },
-//     axisY: {
-//       title: 'User responses',
-//       suffix: '%',
-//       includeZero: true
-//     },
-//     axisX: {
-//       suffix: '',
-//       title: 'Responses'
-//     },
-//     data: []
-//   }
-// }
-
 const showSurveyFailure = () => {
   $('#survey-status').text('Survey not retrieved!')
 }
@@ -95,6 +76,5 @@ module.exports = {
   updateSurveyModal,
   updateSurveyFailure,
   respondToSurvey,
-  // viewSurveySuccess,
   store
 }

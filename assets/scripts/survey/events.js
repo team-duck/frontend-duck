@@ -12,13 +12,16 @@ const onIndexSurvey = event => {
   if (event) {
     event.preventDefault()
   }
+
   api.indexSurvey()
     .then(ui.indexSurveySuccess)
     .catch(ui.indexSurveyFailure)
 }
+
 const onSocketIndex = message => {
   console.log('socket words', message)
   const indexView = store.view === 'index' // expect store.view to be set by other functions, prevents
+
   api.indexSurvey()
     .then(data => {
       if (indexView) {
@@ -29,21 +32,28 @@ const onSocketIndex = message => {
     })
     .catch(ui.indexSurveyFailure)
 }
+
 const onDeleteSurvey = event => {
   event.preventDefault()
+
   const id = $(event.target).data().id
+
   api.deleteSurvey(id)
     .then(onIndexSurvey)
     .catch(ui.indexSurveyFailure)
 }
 
+// opens a modal for editing the survey
 const onEditSurvey = event => {
   event.preventDefault()
+
   const id = $(event.target).data().id
+
   api.showSurvey(id)
     .then(ui.updateSurveyModal)
     .catch(ui.updateSurveyFailure)
 }
+
 const onCreateSurvey = event => {
   event.preventDefault()
 
@@ -54,31 +64,24 @@ const onCreateSurvey = event => {
     .then(ui.createSurveySuccess)
     .catch(ui.createSurveyFailure)
 }
-// remove parenthesis in event
+
+// retrieve edited survey data from form and process into an object
+// send the object and survey ID to API to update the survey
 const onUpdateSurvey = (event) => {
   event.preventDefault()
-  // remove line 62
+
   const data = getFormFields(event.target)
-  // console.log('clickUpdate', data)
+
   const id = data.survey.id
   delete data.survey.id
   const surveyPojo = processSurveyData(data)
-  // added ui in then and catch
+
   api.updateSurvey(id, surveyPojo)
     .then(ui.updateSurveyModal)
     .catch(ui.updateSurveyFailure)
 }
 
-const onShowSurvey = event => {
-  event.preventDefault()
-
-  const data = getFormFields(event.target)
-
-  api.showSurvey(data.survey.id)
-    .then(ui.respondToSurvey)
-    .catch(ui.showSurveyFailure)
-}
-
+// displays survey results chart
 const onViewResults = event => {
   event.preventDefault()
 
@@ -89,6 +92,7 @@ const onViewResults = event => {
     .catch(ui.showSurveyFailure)
 }
 
+// opens a modal for responding to survey
 const onRespondSurvey = event => {
   event.preventDefault()
 
@@ -99,6 +103,8 @@ const onRespondSurvey = event => {
     .catch(ui.showSurveyFailure) // change
 }
 
+// retrieve answer from form and process into an object
+// send the object and survey ID to API to update the response
 const onAnswerSurvey = event => {
   event.preventDefault()
 
@@ -122,17 +128,8 @@ const onAnswerSurvey = event => {
     .catch(console.error)
 }
 
-const onSeeResults = () => {
-  // event.preventDefault()
-  console.log('inside onSeeResults')
-  // const data = getFormFields(event.target)
-  api.showSurvey('5d8bda85a675551a93f9d5f2')
-    .then(ui.viewSurveySuccess)
-    .catch(ui.failure)
-}
 const addHandlers = () => {
   $('header').on('click', '#all-surveys-link', onIndexSurvey)
-  $('main').on('submit', '#show-survey', onShowSurvey)
   $('main').on('submit', '#create-survey', onCreateSurvey)
   $('main').on('submit', '#update-survey', onUpdateSurvey)
   $('main').on('submit', '#survey-form', onAnswerSurvey)
@@ -140,14 +137,11 @@ const addHandlers = () => {
   $('main').on('click', '.edit-btn', onEditSurvey)
   $('main').on('click', '.results-btn', onViewResults)
   $('main').on('click', '.respond-btn', onRespondSurvey)
-  $('body').on('click', '#test-chart', onSeeResults)
   socket.on('message', onSocketIndex) // listens for an event from the server with the label 'message'
 }
 
 module.exports = {
   onIndexSurvey,
-  onShowSurvey,
   onCreateSurvey,
-  onSeeResults,
   addHandlers
 }
