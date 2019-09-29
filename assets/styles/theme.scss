@@ -74,6 +74,11 @@ button {
   @extend .btn-primary;
 }
 
+.new-option-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 2.5rem;
+}
 // div.sign-in-form {
 //   form {
 //     @include media-breakpoint-up(sm) {

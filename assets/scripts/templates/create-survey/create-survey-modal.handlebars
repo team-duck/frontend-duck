@@ -22,8 +22,14 @@
             <input type="text" class="form-control" id="question-1-option-1" name="question1[option1]" placeholder="Option 1">
             <input type="text" class="form-control" id="question-1-option-2" name="question1[option2]" placeholder="Option 2">
           </div>
-          <button type="submit" class="btn btn-primary">Create Survey</button>
-          <button type="submit" class="btn btn-primary">Add another question</button>
+          <div class="form-inline">
+            <input type="text" class="form-control col-11" id="question-n-option-n" name="questionn[optionn]" placeholder="Click button to add another option..." disabled>
+            <button id="newOption" type="button" class="col-1 btn btn-primary new-option-btn">+</button>
+          </div>
+          <div class="">
+            <button type="submit" class="btn btn-primary">Create Survey</button>
+            <button type="button" class="btn btn-primary new-question-btn">Add another question</button>
+          </div>
         </form>
       </div>
     </div>

@@ -3,6 +3,7 @@
 const api = require('./api')
 const getFormFields = require('./../../../lib/get-form-fields')
 const ui = require('./ui')
+const surveyEvents = require('./../survey/events')
 
 const onLoad = () => {
   ui.loadSplashPage()
@@ -25,6 +26,9 @@ const onSignIn = event => {
 
   api.signIn(data)
     .then(ui.signInSuccess)
+    .then(() => {
+      surveyEvents.onIndexSurvey(null, 'signIn')
+    })
     .catch(ui.signInSuccess)
 }
 
