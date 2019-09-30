@@ -10,7 +10,7 @@ const respondSurveyTemplate = require('./../templates/surveys-page/respond-surve
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
 const showMySurveysTemplate = require('./../templates/surveys-page/my-surveys-page.handlebars')
 const showResultsTemplate = require('./../templates/surveys-page/results-page.handlebars')
-
+const shuffle = require('lodash/shuffle')
 const chartData = require('./../../../lib/chart')
 const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
 
@@ -56,9 +56,9 @@ const indexSurveyHandler = (data, type) => {
     } else if (type === 'my') {
       showSurveysHtml = showMySurveysTemplate({ surveys: data.surveys })
       $('#view').html(showSurveysHtml)
-    } else if (type === 'signIn') {
+    } else if (type === 'default') {
       loadNavbar()
-      loadMainPage(store.surveys)
+      loadMainPage(shuffle(store.surveys))
     }
   })
 }

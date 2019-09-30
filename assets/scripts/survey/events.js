@@ -120,6 +120,7 @@ const onAnswerSurvey = event => {
 
   api.answerSurvey(surveyId, responsePojo)
     .then(ui.answerSurveyHandler)
+    // .then(() => onIndexSurvey(null, 'default'))
     .catch(ui.answerSurveyHandler)
 }
 
