@@ -120,7 +120,6 @@ const answerSurveyHandler = data => {
 }
 
 const showSurveyResults = data => {
-  console.log('survey results', data)
   store.survey = data.survey
   store.view = 'results'
   const options = chartData(data.survey)[0]
