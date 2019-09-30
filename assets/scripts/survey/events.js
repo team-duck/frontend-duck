@@ -119,7 +119,7 @@ const onAnswerSurvey = event => {
 // displays survey results chart
 const onViewResults = event => {
   event.preventDefault()
-
+  store.view = 'results'
   const id = $(event.target).data().id
 
   api.showSurvey(id)

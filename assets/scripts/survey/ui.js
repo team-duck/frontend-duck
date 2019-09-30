@@ -76,6 +76,9 @@ const indexSurveyHandler = (data, type) => {
     } else if (type === 'default' || store.view === 'main') {
       loadJumbotron()
       loadCarousel(shuffle(store.surveys))
+    } else if (store.view === 'results') {
+      store.survey = store.surveys.find(survey => survey._id === store.survey._id)
+      showSurveyResults(store)
     }
   })
 }
@@ -116,6 +119,7 @@ const answerSurveyHandler = data => {
 }
 
 const showSurveyResults = data => {
+  store.survey = data.survey
   const options = chartData(data.survey)[0]
   const showResultsHtml = showResultsTemplate({survey: data.survey})
   $('#view').html(showResultsHtml)
