@@ -19,7 +19,7 @@ const onIndexSurvey = (event, type) => {
 }
 
 const onSocketIndex = message => {
-  console.log('socket words', message)
+  // console.log('socket words', message)
   const indexView = store.view === 'index' // expect store.view to be set by other functions, prevents
 
   api.indexSurvey()
@@ -47,6 +47,7 @@ const onCreateSurvey = event => {
 
   api.createSurvey(surveyPojo)
     .then(ui.createSurveyHandler)
+    .then(() => onIndexSurvey(null))
     .catch(ui.createSurveyHandler)
 }
 
