@@ -114,6 +114,7 @@ const answerSurveyHandler = data => {
   const action = ['answerSurvey', 'danger', 'success']
   handleResponse(data, action, () => {
     // console.log('survey response', data)
+    store.user = data.user
     $('form').trigger('reset')
     $('#respond-survey-modal').modal('toggle')
   })
