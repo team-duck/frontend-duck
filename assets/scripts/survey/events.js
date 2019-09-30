@@ -20,17 +20,8 @@ const onIndexSurvey = (event, type) => {
 
 const onSocketIndex = message => {
   // console.log('socket words', message)
-  const indexView = store.view === 'index' // expect store.view to be set by other functions, prevents
-
-  api.indexSurvey()
-    .then(data => {
-      if (indexView) {
-        ui.indexSurveyHandler(data)
-      } else {
-        store.surveys = data.surveys
-      }
-    })
-    .catch(ui.indexSurveyHandler)
+  // expect store.view to be set by other functions, prevents
+  onIndexSurvey(null)
 }
 
 const onCreateSurveyButton = event => {
@@ -47,7 +38,7 @@ const onCreateSurvey = event => {
 
   api.createSurvey(surveyPojo)
     .then(ui.createSurveyHandler)
-    .then(() => onIndexSurvey(null))
+    .then(() => onIndexSurvey(null, 'my'))
     .catch(ui.createSurveyHandler)
 }
 
@@ -121,7 +112,7 @@ const onAnswerSurvey = event => {
 
   api.answerSurvey(surveyId, responsePojo)
     .then(ui.answerSurveyHandler)
-    // .then(() => onIndexSurvey(null, 'default'))
+    .then(() => onIndexSurvey(null))
     .catch(ui.answerSurveyHandler)
 }
 
@@ -135,10 +126,28 @@ const onViewResults = event => {
     .then(ui.showSurveyResults)
     .catch(ui.showSurveyHandler)
 }
+// goes to home page
+const onHome = event => {
+  event.preventDefault()
+  store.view = 'main'
+  onIndexSurvey(null, 'default')
+}
+
+const onViewAllSurveys = event => {
+  event.preventDefault()
+  store.view = 'index'
+  onIndexSurvey(null, 'all')
+}
+
+const onViewMySurveys = event => {
+  event.preventDefault()
+  store.view = 'myIndex'
+  onIndexSurvey(null, 'my')
+}
 
 const addHandlers = () => {
-  $('header').on('click', '#all-surveys-link', event => onIndexSurvey(event, 'all'))
-  $('header').on('click', '#my-surveys-link', event => onIndexSurvey(event, 'my'))
+  $('header').on('click', '#all-surveys-link', onViewAllSurveys)
+  $('header').on('click', '#my-surveys-link', onViewMySurveys)
   $('main').on('submit', '#create-survey', onCreateSurvey)
   $('main').on('submit', '#update-survey', onUpdateSurvey)
   $('main').on('submit', '#survey-form', onAnswerSurvey)
@@ -147,6 +156,7 @@ const addHandlers = () => {
   $('main').on('click', '.delete-btn', onDeleteSurvey)
   $('main').on('click', '.respond-btn', onRespondSurveyButton)
   $('main').on('click', '.results-btn', onViewResults)
+  $('header').on('click', '#home-link', onHome)
   socket.on('message', onSocketIndex) // listens for an event from the server with the label 'message'
 }
 

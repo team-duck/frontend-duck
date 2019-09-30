@@ -4,15 +4,29 @@ const store = require('./../store')
 const handleResponse = require('./../common/handleResponse')
 const navbarTemplate = require('./../templates/nav-bar-content.handlebars')
 const mainPageTemplate = require('./../templates/main-page/main-body.handlebars')
+const carouselTemplate = require('./../templates/main-page/carousel.handlebars')
+const jumbotronTemplate = require('./../templates/main-page/jumbotron.handlebars')
+
 const createSurveyTemplate = require('./../templates/create-survey/create-survey-modal.handlebars')
 const updateSurveyTemplate = require('./../templates/create-survey/update-survey-modal.handlebars')
 const respondSurveyTemplate = require('./../templates/surveys-page/respond-survey-modal.handlebars')
 const showSurveysTemplate = require('./../templates/surveys-page/surveys-page.handlebars')
 const showMySurveysTemplate = require('./../templates/surveys-page/my-surveys-page.handlebars')
 const showResultsTemplate = require('./../templates/surveys-page/results-page.handlebars')
+
 const shuffle = require('lodash/shuffle')
 const chartData = require('./../../../lib/chart')
 const CanvasJS = require('canvasjs/dist/jquery.canvasjs.min.js')
+
+const loadCarousel = surveys => {
+  const carouselHtml = carouselTemplate({surveys: surveys})
+  $('carousel-holder').html(carouselHtml)
+}
+
+const loadJumbotron = () => {
+  const jumbotronHtml = jumbotronTemplate()
+  $('jumbotron-holder').html(jumbotronHtml)
+}
 
 const loadNavbar = () => {
   const navbarHtml = navbarTemplate()
@@ -50,15 +64,18 @@ const indexSurveyHandler = (data, type) => {
   handleResponse(data, action, () => {
     store.surveys = data.surveys
     let showSurveysHtml
-    if (type === 'all') {
+    if (type === 'all' || store.view === 'index') {
       showSurveysHtml = showSurveysTemplate({ surveys: data.surveys })
       $('#view').html(showSurveysHtml)
-    } else if (type === 'my') {
+    } else if (type === 'my' || store.view === 'myIndex') {
       showSurveysHtml = showMySurveysTemplate({ surveys: data.surveys })
       $('#view').html(showSurveysHtml)
-    } else if (type === 'default') {
+    } else if (type === 'main') {
       loadNavbar()
       loadMainPage(shuffle(store.surveys))
+    } else if (type === 'default' || store.view === 'main') {
+      loadJumbotron()
+      loadCarousel(shuffle(store.surveys))
     }
   })
 }
