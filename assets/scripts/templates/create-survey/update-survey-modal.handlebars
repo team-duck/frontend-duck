@@ -17,8 +17,8 @@
           {{#each survey.questions as |question| }}
             {{> update-question surveyId=survey._id question=question }}
           {{/each}}
-          <button type="submit" class="btn btn-primary">Update Survey</button>
-          <button type="submit" class="btn btn-primary">Add another question</button>
+          <button type="submit" class="btn btn-warning">Update Survey</button>
+          <!-- <button type="submit" class="btn btn-warning">Add another question</button> -->
         </form>
       </div>
     </div>

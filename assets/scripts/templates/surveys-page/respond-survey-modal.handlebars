@@ -3,27 +3,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="respond-survey-label">Respond to Survey</h5>
+        <h5 class="modal-title" id="respond-survey-label">{{survey.title}}</h5>
         </button>
       </div>
 
       <div class="modal-body">
         <div class="col">
-          <div class="card survey-card">
-            <div class="card-header">
-              {{survey.title}}
-            </div>
-            <div class="card-body">
-              <form id="survey-form">
-                <input type="hidden" name="survey[id]" value="{{survey._id}}">
-                {{#each survey.questions as |question| }}
-                  {{> survey-question surveyId=survey._id question=question }}
-                {{/each}}
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="submit" class="btn btn-primary results-btn" data-id="{{survey._id}}">Results</button>
-              </form>
-            </div>
-          </div>
+          <form id="survey-form">
+            <input type="hidden" name="survey[id]" value="{{survey._id}}">
+            {{#each survey.questions as |question| }}
+              {{> survey-question surveyId=survey._id question=question }}
+            {{/each}}
+            <button type="submit" class="btn btn-warning mt-3">Submit</button>
+            <button type="submit" class="btn btn-warning mt-3 results-btn" data-id="{{survey._id}}">Results</button>
+          </form>
         </div>
       </div>
     </div>

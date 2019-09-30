@@ -1,0 +1,14 @@
+<div class="col-4">
+  <div class="card">
+    <div class="card-header">
+      {{survey.title}}
+    </div>
+    <div class="card-body">
+      {{#each survey.questions}}
+        <p>{{this.text}}</p>
+      {{/each}}
+      <button class="btn btn-warning respond-btn" data-id="{{survey._id}}" {{hasAnswered survey._id}}>Respond</button>
+      <a href="#" class="btn btn-warning results-btn" data-id="{{survey._id}}">Results</a>
+    </div>
+  </div>
+</div>

@@ -1,2 +1,7 @@
-<h2>{{survey.title}}</h2>
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<div class="container container-margin">
+  <h2>{{survey.title}}</h2>
+  {{#each survey.questions}}
+    <p>{{incremented @index}}. {{this.text}}</p>
+  {{/each}}
+  <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+</div>
