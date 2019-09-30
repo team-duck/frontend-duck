@@ -130,7 +130,7 @@ const onViewResults = event => {
 const onHome = event => {
   event.preventDefault()
   store.view = 'main'
-  onIndexSurvey(null, 'default')
+  onIndexSurvey(null, 'main')
 }
 
 const onViewAllSurveys = event => {
