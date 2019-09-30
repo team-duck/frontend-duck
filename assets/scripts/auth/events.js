@@ -27,7 +27,7 @@ const onSignIn = event => {
   api.signIn(data)
     .then(ui.signInSuccess)
     .then(() => {
-      surveyEvents.onIndexSurvey(null, 'default')
+      surveyEvents.onIndexSurvey(null, 'main')
     })
     .catch(ui.signInSuccess)
 }
@@ -55,9 +55,6 @@ const addHandlers = () => {
   $('main').on('submit', '#sign-in', onSignIn)
   $('header').on('submit', '#change-password', onChangePassword)
   $('header').on('click', '#signout-button', onSignOut)
-  $('header').on('click', '#home-link', () => {
-    surveyEvents.onIndexSurvey(null, 'default')
-  })
 }
 
 module.exports = {
