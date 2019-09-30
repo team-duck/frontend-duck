@@ -12,13 +12,13 @@ button {
   border-radius: 2.5rem;
 }
 
-input {
-  margin-bottom: .75rem;
-
-  &:not([type="submit"]) {
-    @extend .form-control
-  }
-}
+// input {
+//   margin-bottom: .75rem;
+//
+  // &:not([type="submit"]) {
+  //   @extend .form-control
+  // }
+// }
 
 nav {
   @extend .navbar;
@@ -38,11 +38,11 @@ nav {
 }
 
 .carousel-control-next {
-  width: 4%;
+  width: 2%;
 }
 
 .carousel-control-prev {
-  width: 4%;
+  width: 2%;
 }
 
 .carousel-control-prev-icon {

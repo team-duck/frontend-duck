@@ -4,6 +4,9 @@
       {{survey.title}}
     </div>
     <div class="card-body">
+      {{#each survey.questions}}
+        <p>{{this.text}}</p>
+      {{/each}}
       <button class="btn btn-warning respond-btn btn-sm" data-id="{{survey._id}}" {{hasAnswered survey._id}}>Respond</button>
       <a href="#" class="btn btn-warning results-btn btn-sm" data-id="{{survey._id}}">Results</a>
       {{#if (ownership survey.owner) }}
