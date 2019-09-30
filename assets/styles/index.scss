@@ -1,6 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~animate.css/animate.css';
 @import 'theme';
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Cabin+Sketch|Fredericka+the+Great&display=swap');
 
 .respond-btn {
   margin: 13px 12px 12px 10px;
@@ -15,6 +17,21 @@
 .edit-btn {
   display: block;
   text-align: center;
+}
+
+.jumbo {
+  animation-duration: 2s;
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 80px;
+  padding: 0 10%;
+}
+
+.jumbotron {
+  // background-color: #9eb6f7;
+}
+
+.lead {
+  font-family: 'Fredericka the Great', cursive;
 }
 
 .results-btn {
