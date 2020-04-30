@@ -12,7 +12,7 @@
     "bootstrap": "^4.1.2",
     "canvas": "^2.6.0",
     "canvasjs": "^1.8.1",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "popper.js": "^1.14.3",
     "socket.io-client": "^2.3.0"
   },
